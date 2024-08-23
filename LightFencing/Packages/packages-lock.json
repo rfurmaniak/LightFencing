@@ -241,6 +241,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "dev.agred.attachattributes": {
+      "version": "https://github.com/Agredek/unity-auto-attach-component-attributes.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f489fe0451311cb5e3dacc00dcd2f6e3c19122c7"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
