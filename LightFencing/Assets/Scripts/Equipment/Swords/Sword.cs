@@ -16,14 +16,9 @@ namespace LightFencing.Equipment.Swords
         [SerializeField]
         private GameObject handle;
 
-        [SerializeField]
-        private InputActionReference activateAction;
-
         private IBladeVisuals _visuals;
 
         private MainConfig _mainConfig;
-        private float DischargeTime => _mainConfig.SwordDischargeTime;
-        private bool AllowSelfHit => _mainConfig.AllowSelfHit;
 
         private float _maxBatteryLevel;
         private float _currentBatteryLevel;
@@ -31,30 +26,15 @@ namespace LightFencing.Equipment.Swords
         private bool _bladeActive;
         private bool _bladeDischarged;
 
+        private float DischargeTime => _mainConfig.SwordDischargeTime;
+        private bool AllowSelfHit => _mainConfig.AllowSelfHit;
+
         [UsedImplicitly]
         [Inject]
         private void Construct(MainConfig mainConfig, IBladeVisuals visuals)
         {
             _mainConfig = mainConfig;
             _visuals = visuals;
-        }
-
-        private void OnEnable()
-        {
-            if (!activateAction)
-                return;
-
-            activateAction.action.performed += OnActivated;
-            activateAction.action.canceled += OnDeactivated;
-        }
-
-        private void OnDisable()
-        {
-            if (!activateAction)
-                return;
-
-            activateAction.action.performed -= OnActivated;
-            activateAction.action.canceled -= OnDeactivated;
         }
 
         public void TryTurnBladeOn()
@@ -106,6 +86,7 @@ namespace LightFencing.Equipment.Swords
         {
             if (!AllowSelfHit && shield.PlayerId == Player.LocalPlayer.Id)
                 return;
+            shield.HandleBladeHit();
             DischargeBlade();
         }
 
@@ -121,12 +102,12 @@ namespace LightFencing.Equipment.Swords
 
         }
 
-        private void OnActivated(InputAction.CallbackContext obj)
+        protected override void OnActivated(InputAction.CallbackContext obj)
         {
             TryTurnBladeOn();
         }
 
-        private void OnDeactivated(InputAction.CallbackContext obj)
+        protected override void OnDeactivated(InputAction.CallbackContext obj)
         {
             TurnBladeOff();
         }

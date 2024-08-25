@@ -1017,9 +1017,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 649022326}
+  - component: {fileID: 649022331}
+  - component: {fileID: 649022329}
+  - component: {fileID: 649022332}
   - component: {fileID: 649022328}
   - component: {fileID: 649022327}
-  - component: {fileID: 649022329}
+  - component: {fileID: 649022330}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -1072,8 +1075,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handTracker: {fileID: 649022327}
+  activateAction: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
   shieldGenerator: {fileID: 1685720873}
   shieldArmor: {fileID: 1787857381}
+  armorCollider: {fileID: 1787857386}
 --- !u!114 &649022329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1090,8 +1096,56 @@ MonoBehaviour:
   - {fileID: 649022328}
   _identifier: 
   _useSceneContext: 0
-  _context: {fileID: 0}
+  _context: {fileID: 1898169239}
   _bindType: 0
+--- !u!114 &649022330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649022325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbee67509f39be54fafb81d2d4258d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shieldArmorRenderer: {fileID: 1787857383}
+--- !u!114 &649022331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649022325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers: []
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &649022332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649022325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 649022330}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 649022331}
+  _bindType: 1
 --- !u!1 &650025388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,10 +1422,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handTracker: {fileID: 734915855}
-  blade: {fileID: 914527960}
-  handle: {fileID: 1744831094}
   activateAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
+  blade: {fileID: 914527960}
+  handle: {fileID: 1744831094}
 --- !u!114 &734915857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9781,7 +9835,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c5cd9e377e18ba647b05b40710204127, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

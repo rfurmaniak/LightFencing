@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02745cf61fbf25c48a58113234f6ef66, type: 3}
   m_Name: MainConfig
   m_EditorClassIdentifier: 
-  <AllowSelfHit>k__BackingField: 0
+  <AllowSelfHit>k__BackingField: 1
   <SwordDischargeTime>k__BackingField: 2
