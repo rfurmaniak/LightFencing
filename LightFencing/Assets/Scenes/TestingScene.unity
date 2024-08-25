@@ -1338,6 +1338,8 @@ MonoBehaviour:
   handTracker: {fileID: 734915855}
   blade: {fileID: 914527960}
   handle: {fileID: 1744831094}
+  restorationTimeInSeconds: 0
+  activateAction: {fileID: 0}
 --- !u!114 &734915857
 MonoBehaviour:
   m_ObjectHideFlags: 0

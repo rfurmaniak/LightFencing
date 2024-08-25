@@ -22,10 +22,29 @@ namespace LightFencing.Equipment.Swords
         [SerializeField]
         private InputActionReference activateAction;
 
+        [SerializeField]
+        private InputActionReference deactivateAction;
+
         private float _maxBatteryLevel;
         private float _currentBatteryLevel;
 
         private bool _bladeDischarged;
+
+        private void Awake()
+        {
+            activateAction.action.performed += OnActivated;
+            deactivateAction.action.performed += OnDeactivated;
+        }
+
+        private void OnDeactivated(InputAction.CallbackContext obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void OnActivated(InputAction.CallbackContext obj)
+        {
+            throw new System.NotImplementedException();
+        }
 
         private void Update()
         {
