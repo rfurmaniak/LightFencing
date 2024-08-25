@@ -1,5 +1,5 @@
 using Dev.Agred.Tools.AttachAttributes;
-using LightFencing.Tests;
+using LightFencing.Utils;
 using UnityEngine;
 
 namespace LightFencing.Equipment
@@ -10,6 +10,13 @@ namespace LightFencing.Equipment
         [SerializeField]
         [GetComponent]
         protected BodyPartTracker handTracker;
+
+        public string PlayerId { get; protected set; }
+
+        public void Setup(string playerId)
+        {
+            PlayerId = playerId;
+        }
 
         public void AttachToHand(Transform controllerTransform)
         {

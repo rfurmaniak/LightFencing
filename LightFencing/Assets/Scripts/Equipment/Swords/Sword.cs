@@ -1,5 +1,7 @@
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
+using LightFencing.Equipment.Shields;
+using LightFencing.Players;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -15,12 +17,13 @@ namespace LightFencing.Equipment.Swords
         private GameObject handle;
 
         [SerializeField]
-        private float restorationTimeInSeconds;
-
-        [SerializeField]
         private InputActionReference activateAction;
 
         private IBladeVisuals _visuals;
+
+        private MainConfig _mainConfig;
+        private float DischargeTime => _mainConfig.SwordDischargeTime;
+        private bool AllowSelfHit => _mainConfig.AllowSelfHit;
 
         private float _maxBatteryLevel;
         private float _currentBatteryLevel;
@@ -30,8 +33,9 @@ namespace LightFencing.Equipment.Swords
 
         [UsedImplicitly]
         [Inject]
-        private void Construct(IBladeVisuals visuals)
+        private void Construct(MainConfig mainConfig, IBladeVisuals visuals)
         {
+            _mainConfig = mainConfig;
             _visuals = visuals;
         }
 
@@ -88,17 +92,28 @@ namespace LightFencing.Equipment.Swords
             if (!_bladeActive) 
                 return;
 
+            var shield = other.GetComponent<ShieldReference>().Shield;
+            HandleCollisionEnterWithShield(shield);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            var shield = other.GetComponent<ShieldReference>().Shield;
+            HandleCollisionExitWithShield(shield);
+        }
+
+        private void HandleCollisionEnterWithShield(Shield shield)
+        {
+            if (!AllowSelfHit && shield.PlayerId == Player.LocalPlayer.Id)
+                return;
             DischargeBlade();
         }
 
-        private async void OnTriggerExit(Collider other)
+        private async void HandleCollisionExitWithShield(Shield shield)
         {
-            await RestoreBlade(restorationTimeInSeconds);
-        }
-
-        private void HandleCollisionWithShield()
-        {
-
+            if (!AllowSelfHit && shield.PlayerId == Player.LocalPlayer.Id)
+                return;
+            await RestoreBlade(DischargeTime);
         }
 
         private void HandleCollisionWithArmor()

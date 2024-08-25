@@ -1,11 +1,14 @@
 using LightFencing.Equipment;
 using UnityEngine;
 
-public class Shield : BaseEquipmentPart
+namespace LightFencing.Equipment.Shields
 {
-    [SerializeField]
-    private GameObject shieldGenerator;
+    public class Shield : BaseEquipmentPart
+    {
+        [SerializeField]
+        private GameObject shieldGenerator;
 
-    [SerializeField]
-    private GameObject shieldArmor;
+        [SerializeField]
+        private GameObject shieldArmor;
+    }
 }

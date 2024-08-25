@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LightFencing.Tests
+namespace LightFencing.Utils
 {
     public class BodyPartTracker : MonoBehaviour
     {

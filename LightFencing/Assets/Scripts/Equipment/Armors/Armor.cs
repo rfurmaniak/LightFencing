@@ -1,4 +1,4 @@
-using LightFencing.Tests;
+using LightFencing.Utils;
 using UnityEngine;
 
 namespace LightFencing.Equipment.Armors
