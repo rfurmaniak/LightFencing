@@ -1280,9 +1280,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 734915854}
+  - component: {fileID: 734915857}
+  - component: {fileID: 734915859}
   - component: {fileID: 734915856}
   - component: {fileID: 734915855}
-  - component: {fileID: 734915857}
   - component: {fileID: 734915858}
   m_Layer: 0
   m_Name: Sword
@@ -1338,8 +1339,9 @@ MonoBehaviour:
   handTracker: {fileID: 734915855}
   blade: {fileID: 914527960}
   handle: {fileID: 1744831094}
-  restorationTimeInSeconds: 0
-  activateAction: {fileID: 0}
+  restorationTimeInSeconds: 2
+  activateAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!114 &734915857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1356,7 +1358,7 @@ MonoBehaviour:
   - {fileID: 734915856}
   _identifier: 
   _useSceneContext: 0
-  _context: {fileID: 0}
+  _context: {fileID: 1898169239}
   _bindType: 0
 --- !u!54 &734915858
 Rigidbody:
@@ -1385,6 +1387,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &734915859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734915853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers: []
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!1 &778483866
 GameObject:
   m_ObjectHideFlags: 0
@@ -2660,6 +2679,8 @@ GameObject:
   - component: {fileID: 914527963}
   - component: {fileID: 914527962}
   - component: {fileID: 914527961}
+  - component: {fileID: 914527966}
+  - component: {fileID: 914527965}
   m_Layer: 6
   m_Name: Blade
   m_TagString: Untagged
@@ -2753,6 +2774,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 734915854}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &914527965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914527960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 914527966}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 734915859}
+  _bindType: 1
+--- !u!114 &914527966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914527960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e8041bce969f394892a4b0bd89b49bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bladeRenderer: {fileID: 914527962}
 --- !u!1 &967567311
 GameObject:
   m_ObjectHideFlags: 0

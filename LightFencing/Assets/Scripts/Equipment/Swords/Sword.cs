@@ -1,15 +1,13 @@
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit.Inputs;
+using Zenject;
 
 namespace LightFencing.Equipment.Swords
 {
     public class Sword : BaseEquipmentPart
     {
-        [SerializeField]
-        private IBladeVisuals visuals;
-
         [SerializeField]
         private GameObject blade;
 
@@ -22,60 +20,74 @@ namespace LightFencing.Equipment.Swords
         [SerializeField]
         private InputActionReference activateAction;
 
-        [SerializeField]
-        private InputActionReference deactivateAction;
+        private IBladeVisuals _visuals;
 
         private float _maxBatteryLevel;
         private float _currentBatteryLevel;
 
+        private bool _bladeActive;
         private bool _bladeDischarged;
 
-        private void Awake()
+        [UsedImplicitly]
+        [Inject]
+        private void Construct(IBladeVisuals visuals)
         {
+            _visuals = visuals;
+        }
+
+        private void OnEnable()
+        {
+            if (!activateAction)
+                return;
+
             activateAction.action.performed += OnActivated;
-            deactivateAction.action.performed += OnDeactivated;
+            activateAction.action.canceled += OnDeactivated;
         }
 
-        private void OnDeactivated(InputAction.CallbackContext obj)
+        private void OnDisable()
         {
-            throw new System.NotImplementedException();
+            if (!activateAction)
+                return;
+
+            activateAction.action.performed -= OnActivated;
+            activateAction.action.canceled -= OnDeactivated;
         }
 
-        private void OnActivated(InputAction.CallbackContext obj)
+        public void TryTurnBladeOn()
         {
-            throw new System.NotImplementedException();
-        }
-
-        private void Update()
-        {
-            InputActionManager oko;
-        }
-
-        public void TurnBladeOn()
-        {
-            visuals.TurnBladeOn();
+            if (_bladeDischarged)
+                return;
+            _bladeActive = true;
+            _visuals.TurnBladeOn();
         }
 
         public void TurnBladeOff()
         {
-            visuals.TurnBladeOff();
+            if (_bladeDischarged)
+                return;
+            _bladeActive = false;
+            _visuals.TurnBladeOff();
         }
 
         private void DischargeBlade()
         {
             _bladeDischarged = true;
-            visuals.DischargeBlade();
-            TurnBladeOff();
+            _visuals.DischargeBlade();
         }
 
         private async UniTask RestoreBlade(float restorationTime)
         {
             await UniTask.Delay((int)(restorationTime * 1000));
             _bladeDischarged = false;
+            TurnBladeOff();
         }
 
         private void OnTriggerEnter(Collider other)
         {
+            //Only active blade reacts to triggers
+            if (!_bladeActive) 
+                return;
+
             DischargeBlade();
         }
 
@@ -92,6 +104,16 @@ namespace LightFencing.Equipment.Swords
         private void HandleCollisionWithArmor()
         {
 
+        }
+
+        private void OnActivated(InputAction.CallbackContext obj)
+        {
+            TryTurnBladeOn();
+        }
+
+        private void OnDeactivated(InputAction.CallbackContext obj)
+        {
+            TurnBladeOff();
         }
     }
 }
