@@ -6,3 +6,4 @@ LightFencing/Logs/
 LightFencing/UserSettings/
 LightFencing/obj/
 LightFencing/.vs/
+*.csproj

@@ -853,14 +853,6 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Zenject.Player.csproj">
@@ -870,6 +862,14 @@
     <ProjectReference Include="Zenject-IntegrationTests.Player.csproj">
       <Project>{A330BEDF-01AA-1355-FE0C-642D35F152A1}</Project>
       <Name>Zenject-IntegrationTests.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.TestRunner.Player.csproj">
+      <Project>{3354E7D6-699E-76C4-E8BF-4B54EA1B9FB4}</Project>
+      <Name>UnityEngine.TestRunner.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.Player.csproj">
+      <Project>{1F2FAD34-A506-595D-7713-BF8059ED1E15}</Project>
+      <Name>UnityEngine.UI.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

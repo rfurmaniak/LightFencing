@@ -68,6 +68,9 @@
     <Compile Include="Assets\Scripts\Equipment\Swords\Sword.cs" />
     <Compile Include="Assets\Scripts\Core\Interactions\IDeviceTransformProvider.cs" />
     <Compile Include="Assets\Scripts\Equipment\BaseEquipmentPart.cs" />
+    <Compile Include="Assets\Scripts\Equipment\Swords\BasicBladeVisuals.cs" />
+    <Compile Include="Assets\Scripts\Equipment\Shields\IShieldVisuals.cs" />
+    <Compile Include="Assets\Scripts\Equipment\Swords\IBladeVisuals.cs" />
     <Compile Include="Assets\Scripts\Core\Interactions\Handedness.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -826,14 +829,6 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.XR.Interaction.Toolkit">
-      <HintPath>Library\ScriptAssemblies\Unity.XR.Interaction.Toolkit.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Zenject.Player.csproj">
@@ -844,9 +839,21 @@
       <Project>{DF2ADC93-1F69-73ED-E91A-C374631174B3}</Project>
       <Name>UniTask.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.XR.Interaction.Toolkit.Player.csproj">
+      <Project>{28160759-0C54-AC15-8630-79994176B3E5}</Project>
+      <Name>Unity.XR.Interaction.Toolkit.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Agred.Nrjwolf.Tools.AttachAttributes.Player.csproj">
       <Project>{5940698B-5337-EA3D-6E1E-9F57C909584C}</Project>
       <Name>Agred.Nrjwolf.Tools.AttachAttributes.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InputSystem.Player.csproj">
+      <Project>{D21604E8-C427-AC62-C453-13725D107FDE}</Project>
+      <Name>Unity.InputSystem.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.Player.csproj">
+      <Project>{1F2FAD34-A506-595D-7713-BF8059ED1E15}</Project>
+      <Name>UnityEngine.UI.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
