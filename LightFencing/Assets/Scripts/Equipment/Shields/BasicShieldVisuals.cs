@@ -1,5 +1,5 @@
-using Cysharp.Threading.Tasks;
 using UnityEngine;
+using static LightFencing.Utils.ColorLerp;
 
 namespace LightFencing.Equipment.Shields
 {
@@ -9,44 +9,31 @@ namespace LightFencing.Equipment.Shields
         private MeshRenderer shieldArmorRenderer;
 
         private Color _startColor;
+        private Material _shieldMaterial;
 
         private void Awake()
         {
-            _startColor = shieldArmorRenderer.material.color;
+            _shieldMaterial = shieldArmorRenderer.material;
+            _startColor = _shieldMaterial.color;
             LightDown();
         }
 
         public async void BladeHit()
         {
-            await LerpColor(Color.yellow, 0.25f);
-            await LerpColor(_startColor, 0.25f);
+            await LerpColor(_shieldMaterial, Color.yellow, 0.25f);
+            await LerpColor(_shieldMaterial, _startColor, 0.25f);
         }
 
         public async void LightDown()
         {
-            await LerpColor(Color.blue, 0.25f);
-            await LerpColor(new Color(0,0,1,0), 0.25f);
+            await LerpColor(_shieldMaterial, Color.blue, 0.25f);
+            await LerpColor(_shieldMaterial, new Color(0, 0, 1, 0), 0.25f);
         }
 
         public async void LightUp()
         {
-            await LerpColor(Color.green, 0.25f);
-            await LerpColor(_startColor, 0.25f);
-        }
-
-        public async UniTask LerpColor(Color destinationColor, float lerpTime)
-        {
-            Color startColor = shieldArmorRenderer.material.color;
-            float elapsedTime = 0f;
-
-            while (elapsedTime < lerpTime)
-            {
-                elapsedTime += Time.deltaTime;
-                shieldArmorRenderer.material.color = Color.Lerp(startColor, destinationColor, elapsedTime / lerpTime);
-                await UniTask.Yield();
-            }
-
-            shieldArmorRenderer.material.color = destinationColor;
+            await LerpColor(_shieldMaterial, Color.green, 0.25f);
+            await LerpColor(_shieldMaterial, _startColor, 0.25f);
         }
     }
 }

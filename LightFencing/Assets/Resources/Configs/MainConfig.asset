@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AllowSelfHit>k__BackingField: 1
   <SwordDischargeTime>k__BackingField: 2
+  <ArmorHitCooldown>k__BackingField: 2

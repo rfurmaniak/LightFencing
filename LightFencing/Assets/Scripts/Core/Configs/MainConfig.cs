@@ -10,5 +10,8 @@ namespace LightFencing
 
         [field: SerializeField]
         public float SwordDischargeTime { get; private set; }
+
+        [field: SerializeField]
+        public float ArmorHitCooldown { get; private set; }
     }
 }

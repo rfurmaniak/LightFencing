@@ -1,19 +1,13 @@
 using Dev.Agred.Tools.AttachAttributes;
 using LightFencing.Utils;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace LightFencing.Equipment
 {
-    [RequireComponent(typeof(BodyPartTracker))]
     public abstract class BaseEquipmentPart : MonoBehaviour
     {
         [SerializeField]
-        [GetComponent]
-        protected BodyPartTracker handTracker;
-
-        [SerializeField]
-        protected InputActionReference activateAction;
+        protected BodyPartTracker bodyPartTracker;
 
         public string PlayerId { get; protected set; }
 
@@ -22,31 +16,9 @@ namespace LightFencing.Equipment
             PlayerId = playerId;
         }
 
-        protected virtual void OnEnable()
+        public virtual void AttachToPlayer(Transform bodyPartTransform)
         {
-            if (!activateAction)
-                return;
-
-            activateAction.action.performed += OnActivated;
-            activateAction.action.canceled += OnDeactivated;
+            bodyPartTracker.StartTracking(bodyPartTransform);
         }
-
-        protected virtual void OnDisable()
-        {
-            if (!activateAction)
-                return;
-
-            activateAction.action.performed -= OnActivated;
-            activateAction.action.canceled -= OnDeactivated;
-        }
-
-        public void AttachToHand(Transform controllerTransform)
-        {
-            handTracker.StartTracking(controllerTransform);
-        }
-
-        protected abstract void OnActivated(InputAction.CallbackContext obj);
-
-        protected abstract void OnDeactivated(InputAction.CallbackContext obj);
     }
 }

@@ -5,7 +5,7 @@ using Zenject;
 
 namespace LightFencing.Equipment.Shields
 {
-    public class Shield : BaseEquipmentPart
+    public class Shield : ActivatableEquipmentPart
     {
         [SerializeField]
         private GameObject shieldGenerator;
