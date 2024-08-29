@@ -39,6 +39,22 @@ namespace LightFencing.Equipment.Swords
             _visuals = visuals;
         }
 
+        public override void Setup(Player player)
+        {
+            base.Setup(player);
+            _visuals.SwordColor = player.Color;
+        }
+
+        protected override void OnActivated(InputAction.CallbackContext obj)
+        {
+            TryTurnBladeOn();
+        }
+
+        protected override void OnDeactivated(InputAction.CallbackContext obj)
+        {
+            TurnBladeOff();
+        }
+
         public void TryTurnBladeOn()
         {
             if (_bladeDischarged)
@@ -140,16 +156,6 @@ namespace LightFencing.Equipment.Swords
             if (CheckForLocalEquipment(armor))
                 return;
             await ArmorHitCooldown();
-        }
-
-        protected override void OnActivated(InputAction.CallbackContext obj)
-        {
-            TryTurnBladeOn();
-        }
-
-        protected override void OnDeactivated(InputAction.CallbackContext obj)
-        {
-            TurnBladeOff();
         }
 
         private async UniTask ArmorHitCooldown()

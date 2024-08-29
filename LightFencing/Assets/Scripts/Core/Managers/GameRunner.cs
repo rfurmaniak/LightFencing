@@ -46,9 +46,9 @@ namespace LightFencing.Core.Managers
         private void SetupEquipment()
         {
             //I could use base class and iterate over collection, but it's just those three pieces and I don't plan on adding more
-            _sword.Setup(localPlayer.Id);
-            _shield.Setup(localPlayer.Id);
-            _armor.Setup(localPlayer.Id);
+            _sword.Setup(localPlayer);
+            _shield.Setup(localPlayer);
+            _armor.Setup(localPlayer);
             _sword.AttachToPlayer(_deviceTransformProvider.GetControllerTransform(Handedness.Right));
             _shield.AttachToPlayer(_deviceTransformProvider.GetControllerTransform(Handedness.Left));
             _armor.AttachToPlayer(_deviceTransformProvider.GetHeadTransform());

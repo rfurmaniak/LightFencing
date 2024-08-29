@@ -7,6 +7,17 @@ namespace LightFencing.Equipment.Swords
         [SerializeField]
         private MeshRenderer bladeRenderer;
 
+        private Color _swordColor = Color.gray;
+        public Color SwordColor
+        {
+            get => _swordColor;
+            set
+            {
+                _swordColor = value;
+                bladeRenderer.material.color = _swordColor;
+            }
+        }
+
         public void DischargeBlade()
         {
             bladeRenderer.material.color = Color.red;
@@ -14,7 +25,7 @@ namespace LightFencing.Equipment.Swords
 
         public void TurnBladeOff()
         {
-            bladeRenderer.material.color = Color.grey;
+            bladeRenderer.material.color = _swordColor;
         }
 
         public void TurnBladeOn()

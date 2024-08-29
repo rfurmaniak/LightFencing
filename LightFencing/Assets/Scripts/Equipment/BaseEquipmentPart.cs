@@ -1,4 +1,4 @@
-using Dev.Agred.Tools.AttachAttributes;
+using LightFencing.Players;
 using LightFencing.Utils;
 using UnityEngine;
 
@@ -11,9 +11,9 @@ namespace LightFencing.Equipment
 
         public string PlayerId { get; protected set; }
 
-        public void Setup(string playerId)
+        public virtual void Setup(Player player)
         {
-            PlayerId = playerId;
+            PlayerId = player.Id;
         }
 
         public virtual void AttachToPlayer(Transform bodyPartTransform)

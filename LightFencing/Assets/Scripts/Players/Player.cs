@@ -6,5 +6,8 @@ namespace LightFencing.Players
     {
         public static Player LocalPlayer { get; set; }
         public string Id { get; set; }
+
+        [field: SerializeField]
+        public Color Color { get; private set; }
     }
 }
