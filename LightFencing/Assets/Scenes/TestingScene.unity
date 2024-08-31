@@ -10230,8 +10230,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 238851158711293071, guid: 0dc0f5e3fdaca704781eae8756f4ce85,
         type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 238851158711293071, guid: 0dc0f5e3fdaca704781eae8756f4ce85,
+        type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 238851158711293071, guid: 0dc0f5e3fdaca704781eae8756f4ce85,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 361305289126868047, guid: 0dc0f5e3fdaca704781eae8756f4ce85,
         type: 3}
@@ -12145,8 +12155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dac633f5b3460443b58561d65d02136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  causticsEmissionIntensity: 2
-  outlineEmissionIntensity: 3
+  causticsEmissionIntensity: 3
+  outlineEmissionIntensity: 4
   armorRenderer: {fileID: 808640916776855635}
   generatorRenderer: {fileID: 8338851404899058532}
 --- !u!1001 &7041745209120009372

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4560598781964033558}
   - component: {fileID: 8064437133117635910}
   - component: {fileID: 238851158711293071}
-  m_Layer: 0
+  - component: {fileID: 8494736683383849266}
+  m_Layer: 7
   m_Name: Armor
   m_TagString: Shield
   m_Icon: {fileID: 0}
@@ -49,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 974537241358095807}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -99,13 +100,26 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3041730669126319703, guid: aa51a18adeab2fa40ae53903f72f0ebe, type: 3}
+--- !u!114 &8494736683383849266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974537241358095807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8028159a9c2668240ab3d9b21e8c3152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Shield>k__BackingField: {fileID: 1424410618366494151}
 --- !u!1 &1390278849113312779
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +181,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7098565394360792512, guid: aa51a18adeab2fa40ae53903f72f0ebe, type: 3}
+  - {fileID: 2100000, guid: 6cfc06c62c61dd54b81196a6369e8620, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -203,6 +217,7 @@ GameObject:
   - component: {fileID: 2522085340434754138}
   - component: {fileID: 1424410618366494151}
   - component: {fileID: 4098077687524520202}
+  - component: {fileID: 1569373140537344900}
   m_Layer: 0
   m_Name: Lightshield
   m_TagString: Shield
@@ -274,7 +289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _components: []
+  _components:
+  - {fileID: 1569373140537344900}
   _identifier: 
   _useSceneContext: 0
   _context: {fileID: 1791418572533671669}
@@ -311,7 +327,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackRotation: 1
   positionOffset: {x: 0, y: 0, z: 0}
-  rotationOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 90}
+--- !u!114 &1569373140537344900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3975273280962361210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dac633f5b3460443b58561d65d02136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  causticsEmissionIntensity: 3
+  outlineEmissionIntensity: 4
+  armorRenderer: {fileID: 8064437133117635910}
+  generatorRenderer: {fileID: 361305289126868047}
 --- !u!1 &4605997767063164966
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +406,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4696019913486501361, guid: aa51a18adeab2fa40ae53903f72f0ebe, type: 3}
+  - {fileID: 2100000, guid: b267519522752b247aba58713ec86bd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
