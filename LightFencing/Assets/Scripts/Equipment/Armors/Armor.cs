@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using LightFencing.Players;
 using LightFencing.Utils;
 using UnityEngine;
 using Zenject;
@@ -17,6 +18,12 @@ namespace LightFencing.Equipment.Armors
         private void Construct(IArmorVisuals visuals)
         {
             _visuals = visuals;
+        }
+
+        public override void Setup(Player player)
+        {
+            base.Setup(player);
+            _visuals.ArmorColor = player.Color;
         }
 
         public override void AttachToPlayer(Transform bodyPartTransform)
