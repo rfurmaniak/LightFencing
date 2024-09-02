@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Samples/XR Interaction Toolkit/2.5.4/Starter Assets/DemoScene.unity
     guid: 319dafa5c80f29f428dc1e0d03f04177
-  - enabled: 1
+  - enabled: 0
     path: Assets/Samples/XR Interaction Toolkit/2.5.4/Hands Interaction Demo/HandsDemoScene.unity
     guid: 3ff35cecbcc52cc42945cf531638a60a
+  - enabled: 1
+    path: Assets/Scenes/TestingScene.unity
+    guid: aede6c1fc3fad8849802a1ebe921562b
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: efa9677550cd60449b00efe7d6e6f8cb,
       type: 2}
