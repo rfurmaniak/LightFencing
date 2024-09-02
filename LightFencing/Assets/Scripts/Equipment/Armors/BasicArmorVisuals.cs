@@ -33,5 +33,10 @@ namespace LightFencing.Equipment.Armors
             LerpColor(_armorMaterial, _startColor, 0.25f).Forget();
             await LerpColor(_helmetMaterial, _startColor, 0.25f);
         }
+
+        public void SetHelmetVisibility(bool helmetVisibility)
+        {
+            helmetRenderer.enabled = helmetVisibility;
+        }
     }
 }

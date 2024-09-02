@@ -24,6 +24,7 @@ namespace LightFencing.Equipment.Armors
         {
             base.Setup(player);
             _visuals.ArmorColor = player.Color;
+            _visuals.SetHelmetVisibility(player.Id != Player.LocalPlayer.Id);
         }
 
         public override void AttachToPlayer(Transform bodyPartTransform)

@@ -7,5 +7,6 @@ namespace LightFencing.Equipment.Armors
     {
         Color ArmorColor { get; set; }
         void BladeHit();
+        void SetHelmetVisibility(bool helmetVisibility);
     }
 }

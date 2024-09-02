@@ -9813,6 +9813,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lightshield
       objectReference: {fileID: 0}
+    - target: {fileID: 4098077687524520202, guid: 0dc0f5e3fdaca704781eae8756f4ce85,
+        type: 3}
+      propertyPath: LockRotation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4810806453081718348, guid: 0dc0f5e3fdaca704781eae8756f4ce85,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9862,6 +9867,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064437133117635910, guid: 0dc0f5e3fdaca704781eae8756f4ce85,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11855,6 +11865,11 @@ PrefabInstance:
         type: 3}
       propertyPath: positionOffset.z
       value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 1178769327871629199, guid: 4c89fbdb3b42fe0469b3ea7a46196d6f,
+        type: 3}
+      propertyPath: lockRotation
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1178769327871629199, guid: 4c89fbdb3b42fe0469b3ea7a46196d6f,
         type: 3}

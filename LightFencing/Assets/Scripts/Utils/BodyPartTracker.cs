@@ -5,7 +5,7 @@ namespace LightFencing.Utils
     public class BodyPartTracker : MonoBehaviour
     {
         [SerializeField]
-        private bool trackRotation = true;
+        private Axis lockRotation;
 
         [SerializeField]
         private Vector3 positionOffset;
@@ -40,10 +40,14 @@ namespace LightFencing.Utils
             }
 
             transform.position = _transformToTrack.position + positionOffset;
-            if (trackRotation)
-            {
-                transform.rotation = Quaternion.Euler(_transformToTrack.rotation.eulerAngles + rotationOffset);
-            }
+
+            var rotationToSet = _transformToTrack.rotation.eulerAngles + rotationOffset;
+
+            rotationToSet.x = lockRotation.HasFlag(Axis.X) ? 0 : rotationToSet.x;
+            rotationToSet.y = lockRotation.HasFlag(Axis.Y) ? 0 : rotationToSet.y;
+            rotationToSet.z = lockRotation.HasFlag(Axis.Z) ? 0 : rotationToSet.z;
+            
+            transform.rotation = Quaternion.Euler(rotationToSet);
         }
     }
 }

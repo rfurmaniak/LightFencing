@@ -27,5 +27,10 @@ namespace LightFencing.Equipment.Armors
         public void BladeHit()
         {
         }
+
+        public void SetHelmetVisibility(bool helmetVisibility)
+        {
+            helmetRenderer.enabled = helmetVisibility;
+        }
     }
 }
