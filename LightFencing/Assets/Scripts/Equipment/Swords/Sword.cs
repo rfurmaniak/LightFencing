@@ -57,7 +57,7 @@ namespace LightFencing.Equipment.Swords
 
         public void TryTurnBladeOn()
         {
-            if (_bladeDischarged)
+            if (_bladeDischarged || _bladeActive)
                 return;
             _bladeActive = true;
             _visuals.TurnBladeOn();
@@ -65,7 +65,7 @@ namespace LightFencing.Equipment.Swords
 
         public void TurnBladeOff()
         {
-            if (_bladeDischarged)
+            if (_bladeDischarged || !_bladeActive)
                 return;
             _bladeActive = false;
             _visuals.TurnBladeOff();
@@ -74,6 +74,7 @@ namespace LightFencing.Equipment.Swords
         private void DischargeBlade()
         {
             _bladeDischarged = true;
+            _bladeActive = false;
             _visuals.DischargeBlade();
         }
 

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace LightFencing.Equipment.Swords
@@ -8,6 +9,9 @@ namespace LightFencing.Equipment.Swords
         private static readonly int EmissionKeyword = Shader.PropertyToID("_EmissionColor");
 
         [SerializeField]
+        private Animator animator;
+
+        [SerializeField]
         private float emissionIntensity;
 
         [SerializeField]
@@ -15,6 +19,18 @@ namespace LightFencing.Equipment.Swords
 
         [SerializeField]
         private MeshRenderer handleRenderer;
+
+        [SerializeField]
+        private ParticleSystem idleEffect;
+
+        [SerializeField]
+        private ParticleSystem startupEffect;
+
+        [SerializeField]
+        private ParticleSystem turnoffEffect;
+
+        [SerializeField]
+        private ParticleSystem dischargeEffect;
 
         private Color _swordColor;
         public Color SwordColor
@@ -32,19 +48,24 @@ namespace LightFencing.Equipment.Swords
             }
         }
 
-        public void DischargeBlade()
+        public async void DischargeBlade()
         {
-
+            animator.SetTrigger("Discharge");
+            dischargeEffect.Play();
+            await UniTask.DelayFrame(1);
+            animator.SetBool("BladeEnabled", false);
         }
 
         public void TurnBladeOn()
         {
-
+            animator.SetBool("BladeEnabled", true);
+            startupEffect.Play();
         }
 
         public void TurnBladeOff()
         {
-
+            animator.SetBool("BladeEnabled", false);
+            turnoffEffect.Play();
         }
     }
 }
