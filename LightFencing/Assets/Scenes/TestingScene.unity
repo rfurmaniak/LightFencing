@@ -10640,7 +10640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ebe67948d6dc14e91d8ef20eace954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Color>k__BackingField: {r: 0, g: 0.18981075, b: 1, a: 1}
+  <Color>k__BackingField: {r: 1, g: 0, b: 0.005662918, a: 1}
 --- !u!1 &1898169236
 GameObject:
   m_ObjectHideFlags: 0

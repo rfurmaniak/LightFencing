@@ -32,6 +32,9 @@ namespace LightFencing.Equipment.Swords
         [SerializeField]
         private ParticleSystem dischargeEffect;
 
+        [SerializeField]
+        private ParticleSystem trailEffect;
+
         private Color _swordColor;
         public Color SwordColor
         {
@@ -45,6 +48,17 @@ namespace LightFencing.Equipment.Swords
                 bladeRenderer.material.SetColor(BaseColorKeyword, emissiveColor);
                 bladeRenderer.material.SetColor(EmissionKeyword, emissiveColor);
                 handleRenderer.material.SetColor(EmissionKeyword, emissiveColor);
+                var mainModule = turnoffEffect.main;
+                //It is impossible to do it with turnoffEffect.main.startColor = _swordColor because it's a struct
+                mainModule.startColor = _swordColor;
+                mainModule = startupEffect.main;
+                mainModule.startColor = _swordColor;
+                mainModule = idleEffect.main;
+                mainModule.startColor = _swordColor;
+                mainModule = dischargeEffect.main;
+                mainModule.startColor = _swordColor;
+                mainModule = trailEffect.main;
+                mainModule.startColor = _swordColor;
             }
         }
 
