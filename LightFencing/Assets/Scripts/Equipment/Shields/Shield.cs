@@ -32,10 +32,10 @@ namespace LightFencing.Equipment.Shields
             _visuals.ShieldColor = player.Color;
         }
 
-        public void HandleBladeHit()
+        public void HandleBladeHit(Vector3 hitLocation)
         {
             Debug.Log("Shield hit!");
-            _visuals.BladeHit();
+            _visuals.BladeHit(hitLocation);
         }
 
         protected override void OnActivated(InputAction.CallbackContext obj)

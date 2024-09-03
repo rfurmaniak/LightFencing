@@ -20,7 +20,7 @@ namespace LightFencing.Equipment.Shields
             LightDown();
         }
 
-        public async void BladeHit()
+        public async void BladeHit(Vector3 hitPosition)
         {
             await LerpColor(_shieldMaterial, Color.yellow, 0.25f);
             await LerpColor(_shieldMaterial, _startColor, 0.25f);

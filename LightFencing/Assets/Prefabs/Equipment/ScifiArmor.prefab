@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb1707a48c48244c9c4ab07aaf4d3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackRotation: 1
+  lockRotation: 0
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1461291991130162543
@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 3645668683368380871}
   m_Layer: 8
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Armor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -668,7 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb1707a48c48244c9c4ab07aaf4d3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackRotation: 0
+  lockRotation: 0
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &4115963577149845585

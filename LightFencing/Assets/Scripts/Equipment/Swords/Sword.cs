@@ -85,28 +85,31 @@ namespace LightFencing.Equipment.Swords
             TurnBladeOff();
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter(Collision collision)
         {
             //Only active blade reacts to triggers
-            if (!_bladeActive || _bladeDischarged) 
+            if (!_bladeActive || _bladeDischarged)
                 return;
+
+            var other = collision.collider;
 
             Debug.Log("Collision with active blade detected");
             if (other.CompareTag(Tags.T_Shield))
             {
-                HandleCollisionEnterWithShield(other);
+                HandleCollisionEnterWithShield(collision);
                 return;
             }
 
             if (other.CompareTag(Tags.T_Armor))
             {
-                HandleCollisionEnterWithArmor(other);
+                HandleCollisionEnterWithArmor(collision);
                 return;
             }
         }
 
-        private void OnTriggerExit(Collider other)
+        private void OnCollisionExit(Collision collision)
         {
+            var other = collision.collider;
             if (other.CompareTag(Tags.T_Shield))
             {
                 HandleCollisionExitWithShield(other);
@@ -120,12 +123,12 @@ namespace LightFencing.Equipment.Swords
             }
         }
 
-        private void HandleCollisionEnterWithShield(Collider other)
+        private void HandleCollisionEnterWithShield(Collision collision)
         {
-            var shield = other.GetComponent<ShieldReference>().Shield;
+            var shield = collision.collider.GetComponent<ShieldReference>().Shield;
             if (CheckForLocalEquipment(shield))
                 return;
-            shield.HandleBladeHit();
+            shield.HandleBladeHit(collision.GetContact(0).point);
             DischargeBlade();
         }
 
@@ -137,16 +140,14 @@ namespace LightFencing.Equipment.Swords
             await RestoreBlade(DischargeTime);
         }
 
-        private void HandleCollisionEnterWithArmor(Collider other)
+        private void HandleCollisionEnterWithArmor(Collision collision)
         {
-            Debug.Log("Collision with armor detected");
             if (_armorHasBeenHit) 
                 return;
-            Debug.Log("Collision with armor detected2");
-            var armor = other.GetComponent<ArmorReference>().Armor;
+            var armor = collision.collider.GetComponent<ArmorReference>().Armor;
             if (CheckForLocalEquipment(armor))
                 return;
-            armor.HandleBladeHit();
+            armor.HandleBladeHit(collision.GetContact(0).point);
             //This will decrease player's health
             _armorHasBeenHit = true;
         }

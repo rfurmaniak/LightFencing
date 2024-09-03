@@ -32,6 +32,9 @@ namespace LightFencing
         [SerializeField]
         private ParticleSystem turnoffEffect;
 
+        [SerializeField]
+        private ParticleSystem bladeHitEffect;
+
         private Color _shieldColor;
         public Color ShieldColor
         {
@@ -51,8 +54,10 @@ namespace LightFencing
             }
         }
 
-        public void BladeHit()
+        public void BladeHit(Vector3 hitPosition)
         {
+            bladeHitEffect.transform.position = hitPosition;
+            bladeHitEffect.Play();
         }
 
         public void LightDown()

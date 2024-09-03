@@ -7,6 +7,6 @@ namespace LightFencing.Equipment.Shields
         Color ShieldColor { get; set; }
         void LightUp();
         void LightDown();
-        void BladeHit();
+        void BladeHit(Vector3 hitLocation);
     }
 }

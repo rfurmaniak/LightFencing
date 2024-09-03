@@ -10640,7 +10640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ebe67948d6dc14e91d8ef20eace954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Color>k__BackingField: {r: 1, g: 0, b: 0.005662918, a: 1}
+  <Color>k__BackingField: {r: 0, g: 0.5271826, b: 1, a: 1}
 --- !u!1 &1898169236
 GameObject:
   m_ObjectHideFlags: 0
@@ -11085,6 +11085,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1142782146}
     m_Modifications:
+    - target: {fileID: 219851002915843447, guid: 0dc0f5e3fdaca704781eae8756f4ce85,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3975273280962361210, guid: 0dc0f5e3fdaca704781eae8756f4ce85,
         type: 3}
       propertyPath: m_Name
@@ -11150,7 +11155,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 920412704297892637, guid: 0dc0f5e3fdaca704781eae8756f4ce85, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -12948,6 +12954,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1142782146}
     m_Modifications:
+    - target: {fileID: 2884927183284688732, guid: cdd16a915590d6343a20724743bbed9f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4693890833935152237, guid: cdd16a915590d6343a20724743bbed9f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169951055078078522, guid: cdd16a915590d6343a20724743bbed9f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6214054741945721174, guid: cdd16a915590d6343a20724743bbed9f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12998,10 +13019,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6345213621121333398, guid: cdd16a915590d6343a20724743bbed9f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6734870948512660460, guid: cdd16a915590d6343a20724743bbed9f,
         type: 3}
       propertyPath: m_Name
       value: Lightsword
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734870948512660460, guid: cdd16a915590d6343a20724743bbed9f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922287996528704658, guid: cdd16a915590d6343a20724743bbed9f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635079704370092208, guid: cdd16a915590d6343a20724743bbed9f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13187,6 +13228,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349510791040759977, guid: 4c89fbdb3b42fe0469b3ea7a46196d6f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Armor
       objectReference: {fileID: 0}
     - target: {fileID: 3658153266600706763, guid: 4c89fbdb3b42fe0469b3ea7a46196d6f,
         type: 3}

@@ -33,7 +33,7 @@ namespace LightFencing.Equipment.Armors
             bodyPartTracker.StartTracking(bodyPartTransform);
         }
 
-        public void HandleBladeHit()
+        public void HandleBladeHit(Vector3 hitPosition)
         {
             Debug.Log("Armor hit!");
             _visuals.BladeHit();
