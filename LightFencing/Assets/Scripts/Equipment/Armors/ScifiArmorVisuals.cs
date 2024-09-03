@@ -18,7 +18,6 @@ namespace LightFencing.Equipment.Armors
             get => _armorColor;
             set
             {
-                Debug.Log("Assigning color");
                 _armorColor = value;
                 helmetRenderer.material.SetColor(EmissionKeyword, _armorColor * emissionIntensity);
             }

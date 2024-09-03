@@ -12,6 +12,9 @@ namespace LightFencing
         private static readonly int GeneratorEmissionKeyword = Shader.PropertyToID("_EmissionColor");
 
         [SerializeField]
+        private Animator animator;
+
+        [SerializeField]
         private float causticsEmissionIntensity;
 
         [SerializeField]
@@ -23,18 +26,28 @@ namespace LightFencing
         [SerializeField]
         private MeshRenderer generatorRenderer;
 
+        [SerializeField]
+        private ParticleSystem startupEffect;
+
+        [SerializeField]
+        private ParticleSystem turnoffEffect;
+
         private Color _shieldColor;
         public Color ShieldColor
         {
             get => _shieldColor;
             set
             {
-                Debug.Log("Assigning color");
                 _shieldColor = value;
                 armorRenderer.material.SetColor(OutlineColorKeyword, _shieldColor * outlineEmissionIntensity);
                 armorRenderer.material.SetColor(CausticsColorKeyword, _shieldColor * causticsEmissionIntensity);
                 armorRenderer.material.SetColor(ArmorBaseColorKeyword, _shieldColor);
                 generatorRenderer.material.SetColor(GeneratorEmissionKeyword, _shieldColor * outlineEmissionIntensity);
+                var mainModule = turnoffEffect.main;
+                //It is impossible to do it with turnoffEffect.main.startColor = _shieldColor because it's a struct
+                mainModule.startColor = _shieldColor;
+                mainModule = startupEffect.main;
+                mainModule.startColor = _shieldColor;
             }
         }
 
@@ -44,12 +57,14 @@ namespace LightFencing
 
         public void LightDown()
         {
-            armorRenderer.enabled = false;
+            turnoffEffect.Play();
+            animator.SetBool("ShieldEnabled", false);
         }
 
         public void LightUp()
         {
-            armorRenderer.enabled = true;
+            animator.SetBool("ShieldEnabled", true);
+            startupEffect.Play();
         }
     }
 }

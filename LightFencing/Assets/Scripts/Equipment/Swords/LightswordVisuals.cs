@@ -41,7 +41,6 @@ namespace LightFencing.Equipment.Swords
             get => _swordColor;
             set
             {
-                Debug.Log("Assigning color");
                 _swordColor = value;
                 var emissiveColor = _swordColor;
                 emissiveColor *= emissionIntensity;
