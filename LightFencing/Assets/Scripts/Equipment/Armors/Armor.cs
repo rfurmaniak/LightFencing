@@ -36,7 +36,7 @@ namespace LightFencing.Equipment.Armors
         public void HandleBladeHit(Vector3 hitPosition)
         {
             Debug.Log("Armor hit!");
-            _visuals.BladeHit();
+            _visuals.BladeHit(hitPosition);
         }
     }
 }

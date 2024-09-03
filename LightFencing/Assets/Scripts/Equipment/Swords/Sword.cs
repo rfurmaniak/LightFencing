@@ -27,6 +27,7 @@ namespace LightFencing.Equipment.Swords
         private bool _bladeActive;
         private bool _bladeDischarged;
         private bool _armorHasBeenHit;
+        private bool _armorCooldownActivated;
 
         private float DischargeTime => _mainConfig.SwordDischargeTime;
         private bool AllowSelfHit => _mainConfig.AllowSelfHit;
@@ -147,13 +148,16 @@ namespace LightFencing.Equipment.Swords
             var armor = collision.collider.GetComponent<ArmorReference>().Armor;
             if (CheckForLocalEquipment(armor))
                 return;
+            _armorCooldownActivated = false;
+            _armorHasBeenHit = true;
             armor.HandleBladeHit(collision.GetContact(0).point);
             //This will decrease player's health
-            _armorHasBeenHit = true;
         }
 
         private async void HandleCollisionExitWithArmor(Collider other)
         {
+            if (_armorCooldownActivated) 
+                return;
             var armor = other.GetComponent<ArmorReference>().Armor;
             if (CheckForLocalEquipment(armor))
                 return;
@@ -162,6 +166,7 @@ namespace LightFencing.Equipment.Swords
 
         private async UniTask ArmorHitCooldown()
         {
+            _armorCooldownActivated = true;
             await UniTask.Delay((int)(_mainConfig.ArmorHitCooldown * 1000));
             _armorHasBeenHit = false;
         }

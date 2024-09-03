@@ -25,7 +25,7 @@ namespace LightFencing.Equipment.Armors
             _startColor = _armorMaterial.color;
         }
 
-        public async void BladeHit()
+        public async void BladeHit(Vector3 hitPosition)
         {
             //Yes, this is awful, but it's just for quick testing
             LerpColor(_armorMaterial, Color.red, 0.25f).Forget();

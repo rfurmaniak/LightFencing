@@ -12,6 +12,9 @@ namespace LightFencing.Equipment.Armors
         [SerializeField]
         private MeshRenderer helmetRenderer;
 
+        [SerializeField]
+        private ParticleSystem bladeHitEffect;
+
         private Color _armorColor;
         public Color ArmorColor
         {
@@ -23,8 +26,12 @@ namespace LightFencing.Equipment.Armors
             }
         }
 
-        public void BladeHit()
+        public void BladeHit(Vector3 hitPosition)
         {
+            var lookVector = transform.position - hitPosition;
+            var rotation = Quaternion.LookRotation(lookVector, Vector3.up);
+            bladeHitEffect.transform.SetPositionAndRotation(hitPosition, rotation);
+            bladeHitEffect.Play();
         }
 
         public void SetHelmetVisibility(bool helmetVisibility)

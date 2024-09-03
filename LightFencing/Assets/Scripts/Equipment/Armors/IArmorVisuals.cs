@@ -6,7 +6,7 @@ namespace LightFencing.Equipment.Armors
     public interface IArmorVisuals
     {
         Color ArmorColor { get; set; }
-        void BladeHit();
+        void BladeHit(Vector3 hitPosition);
         void SetHelmetVisibility(bool helmetVisibility);
     }
 }
