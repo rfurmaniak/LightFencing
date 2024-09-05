@@ -63,9 +63,9 @@ namespace LightFencing.Players
             Sword.Setup(this);
             Shield.Setup(this);
             Armor.Setup(this);
-            Sword.AttachToPlayer(_deviceTransformProvider.GetControllerTransform(Handedness.Right));
-            Shield.AttachToPlayer(_deviceTransformProvider.GetControllerTransform(Handedness.Left));
-            Armor.AttachToPlayer(_deviceTransformProvider.GetHeadTransform());
+            Sword.AttachToPlayer(_controller.SwordHandTransform);
+            Shield.AttachToPlayer(_controller.ShieldHandTransform);
+            Armor.AttachToPlayer(_controller.HeadTransform);
         }
 
         public class PlayerFactory : PlaceholderFactory<string, bool, AbstractPlayerController, Player>

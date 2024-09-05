@@ -1,6 +1,10 @@
+using LightFencing.Core.Configs;
+using LightFencing.Core.Interactions;
 using LightFencing.Players;
 using LightFencing.Players.Controllers;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 namespace LightFencing
 {
@@ -9,10 +13,20 @@ namespace LightFencing
         private readonly InputActionReference _activateSwordAction;
         private readonly InputActionReference _activateShieldAction;
 
-        public LocalPlayerController(InputActionReference activateSwordAction, InputActionReference activateShieldAction)
+        private IDeviceTransformProvider _deviceTransformProvider;
+
+        public override Transform HeadTransform => _deviceTransformProvider.GetHeadTransform();
+
+        public override Transform SwordHandTransform => _deviceTransformProvider.GetControllerTransform(Handedness.Right);
+
+        public override Transform ShieldHandTransform => _deviceTransformProvider.GetControllerTransform(Handedness.Left);
+
+        [Inject]
+        public LocalPlayerController(InputConfig inputConfig, IDeviceTransformProvider deviceTransformProvider)
         {
-            _activateSwordAction = activateSwordAction;
-            _activateShieldAction = activateShieldAction;
+            _deviceTransformProvider = deviceTransformProvider;
+            _activateSwordAction = inputConfig.ActivateSwordAction;
+            _activateShieldAction = inputConfig.ActivateShieldAction;
         }
 
         public override void Initialize(Player player)

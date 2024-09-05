@@ -12,6 +12,7 @@ namespace LightFencing.Players
         public override void InstallBindings()
         {
             Container.BindFactory<string, bool, AbstractPlayerController, Player, Player.PlayerFactory>().FromComponentInNewPrefab(playerPrefab);
+            Container.Bind<LocalPlayerController>().AsSingle();
         }
     }
 }

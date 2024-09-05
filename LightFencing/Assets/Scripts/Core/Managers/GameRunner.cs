@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using LightFencing.Core.Configs;
 using LightFencing.Players;
 using System;
 using UnityEngine;
@@ -10,13 +9,13 @@ namespace LightFencing.Core.Managers
     public class GameRunner : MonoBehaviour
     {
         private Player.PlayerFactory _playerFactory;
-        private InputConfig _inputConfig;
+        private LocalPlayerController _playerController;
 
         [UsedImplicitly]
         [Inject]
-        private void Construct(InputConfig inputConfig, Player.PlayerFactory playerFactory)
+        private void Construct(LocalPlayerController localPlayerController, Player.PlayerFactory playerFactory)
         {
-            _inputConfig = inputConfig;
+            _playerController = localPlayerController;
             _playerFactory = playerFactory;
         }
 
@@ -27,8 +26,7 @@ namespace LightFencing.Core.Managers
 
         private void InitializeLocalPlayer()
         {
-            var controller = new LocalPlayerController(_inputConfig.ActivateSwordAction, _inputConfig.ActivateShieldAction);
-            var localPlayer = _playerFactory.Create(Guid.NewGuid().ToString(), true, controller);
+            var localPlayer = _playerFactory.Create(Guid.NewGuid().ToString(), true, _playerController);
             Player.LocalPlayer = localPlayer;
         }
     }
