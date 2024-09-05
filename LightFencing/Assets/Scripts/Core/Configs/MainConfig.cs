@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LightFencing
+namespace LightFencing.Core.Configs
 {
     [CreateAssetMenu(fileName = "MainConfig", menuName = "Configs/MainConfig")]
     public class MainConfig : ScriptableObject

@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ebe67948d6dc14e91d8ef20eace954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword: {fileID: 6421718541496356756}
-  shield: {fileID: 2793475789691048884}
-  armor: {fileID: 7173954430076526599}
+  <Sword>k__BackingField: {fileID: 6421718541496356756}
+  <Shield>k__BackingField: {fileID: 2793475789691048884}
+  <Armor>k__BackingField: {fileID: 7173954430076526599}
   <Color>k__BackingField: {r: 0, g: 0.5271826, b: 1, a: 1}
 --- !u!1001 &1525120763250551219
 PrefabInstance:

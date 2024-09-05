@@ -38,13 +38,13 @@ namespace LightFencing.Equipment.Shields
             _visuals.BladeHit(hitLocation);
         }
 
-        protected override void OnActivated(InputAction.CallbackContext obj)
+        public override void Activate()
         {
             armorCollider.enabled = true;
             _visuals.LightUp();
         }
 
-        protected override void OnDeactivated(InputAction.CallbackContext obj)
+        public override void Deactivate()
         {
             armorCollider.enabled = false;
             _visuals.LightDown();

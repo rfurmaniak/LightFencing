@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
+using LightFencing.Core.Configs;
 using LightFencing.Equipment.Armors;
 using LightFencing.Equipment.Shields;
 using LightFencing.Players;
@@ -46,12 +47,12 @@ namespace LightFencing.Equipment.Swords
             _visuals.SwordColor = player.Color;
         }
 
-        protected override void OnActivated(InputAction.CallbackContext obj)
+        public override void Activate()
         {
             TryTurnBladeOn();
         }
 
-        protected override void OnDeactivated(InputAction.CallbackContext obj)
+        public override void Deactivate()
         {
             TurnBladeOff();
         }
