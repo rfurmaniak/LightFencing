@@ -2,9 +2,8 @@ using UnityEngine;
 
 namespace LightFencing.Equipment.Swords
 {
-    public interface IBladeVisuals
+    public interface IBladeVisuals : IBaseEquipmentVisuals
     {
-        Color SwordColor { get; set; }
         void TurnBladeOn();
         void TurnBladeOff();
         void DischargeBlade();

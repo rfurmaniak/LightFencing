@@ -8,7 +8,7 @@ namespace LightFencing.Equipment.Swords
         private MeshRenderer bladeRenderer;
 
         private Color _swordColor = Color.gray;
-        public Color SwordColor
+        public Color Color
         {
             get => _swordColor;
             set

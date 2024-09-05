@@ -1,7 +1,5 @@
 using JetBrains.Annotations;
-using LightFencing.Players;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace LightFencing.Equipment.Shields
@@ -19,17 +17,13 @@ namespace LightFencing.Equipment.Shields
 
         private IShieldVisuals _visuals;
 
+        protected override IBaseEquipmentVisuals Visuals => _visuals;
+
         [UsedImplicitly]
         [Inject]
         private void Construct(IShieldVisuals visuals)
         {
             _visuals = visuals;
-        }
-
-        public override void Setup(Player player)
-        {
-            base.Setup(player);
-            _visuals.ShieldColor = player.Color;
         }
 
         public void HandleBladeHit(Vector3 hitLocation)

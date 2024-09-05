@@ -16,7 +16,7 @@ namespace LightFencing.Equipment.Armors
         private Material _armorMaterial;
         private Material _helmetMaterial;
 
-        public Color ArmorColor { get;  set; }
+        public Color Color { get;  set; }
 
         private void Awake()
         {

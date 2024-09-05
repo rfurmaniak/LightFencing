@@ -8,18 +8,20 @@ using Zenject;
 
 namespace LightFencing
 {
-    public class LocalPlayerController : AbstractPlayerController
+    public class LocalPlayerController : IPlayerController
     {
         private readonly InputActionReference _activateSwordAction;
         private readonly InputActionReference _activateShieldAction;
 
         private IDeviceTransformProvider _deviceTransformProvider;
 
-        public override Transform HeadTransform => _deviceTransformProvider.GetHeadTransform();
+        public Transform HeadTransform => _deviceTransformProvider.GetHeadTransform();
 
-        public override Transform SwordHandTransform => _deviceTransformProvider.GetControllerTransform(Handedness.Right);
+        public Transform SwordHandTransform => _deviceTransformProvider.GetControllerTransform(Handedness.Right);
 
-        public override Transform ShieldHandTransform => _deviceTransformProvider.GetControllerTransform(Handedness.Left);
+        public Transform ShieldHandTransform => _deviceTransformProvider.GetControllerTransform(Handedness.Left);
+
+        private Player _player;
 
         [Inject]
         public LocalPlayerController(InputConfig inputConfig, IDeviceTransformProvider deviceTransformProvider)
@@ -29,9 +31,9 @@ namespace LightFencing
             _activateShieldAction = inputConfig.ActivateShieldAction;
         }
 
-        public override void Initialize(Player player)
+        public void Initialize(Player player)
         {
-            base.Initialize(player);
+            _player = player;
             _activateShieldAction.action.performed += OnShieldActivated;
             _activateShieldAction.action.canceled += OnShieldDeactivated;
 
@@ -39,7 +41,7 @@ namespace LightFencing
             _activateSwordAction.action.canceled += OnSwordDeactivated;
         }
 
-        public override void Clear()
+        public void Clear()
         {
             _activateShieldAction.action.performed -= OnShieldActivated;
             _activateShieldAction.action.canceled -= OnShieldDeactivated;
@@ -50,21 +52,21 @@ namespace LightFencing
 
         private void OnShieldActivated(InputAction.CallbackContext obj)
         {
-            Player.Shield.Activate();
+            _player.Shield.Activate();
         }
 
         private void OnShieldDeactivated(InputAction.CallbackContext obj)
         {
-            Player.Shield.Deactivate();
+            _player.Shield.Deactivate();
         }
 
         private void OnSwordActivated(InputAction.CallbackContext obj)
         {
-            Player.Sword.Activate();
+            _player.Sword.Activate();
         }
         private void OnSwordDeactivated(InputAction.CallbackContext obj)
         {
-            Player.Sword.Deactivate();
+            _player.Sword.Deactivate();
         }
     }
 }

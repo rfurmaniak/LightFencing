@@ -3,9 +3,8 @@ using UnityEngine;
 namespace LightFencing.Equipment.Armors
 {
 
-    public interface IArmorVisuals
+    public interface IArmorVisuals : IBaseEquipmentVisuals
     {
-        Color ArmorColor { get; set; }
         void BladeHit(Vector3 hitPosition);
         void SetHelmetVisibility(bool helmetVisibility);
     }

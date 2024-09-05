@@ -16,7 +16,7 @@ namespace LightFencing.Equipment.Armors
         private ParticleSystem bladeHitEffect;
 
         private Color _armorColor;
-        public Color ArmorColor
+        public Color Color
         {
             get => _armorColor;
             set

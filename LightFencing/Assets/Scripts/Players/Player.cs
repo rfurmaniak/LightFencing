@@ -1,5 +1,5 @@
 using JetBrains.Annotations;
-using LightFencing.Core.Interactions;
+using LightFencing.Equipment;
 using LightFencing.Equipment.Armors;
 using LightFencing.Equipment.Shields;
 using LightFencing.Equipment.Swords;
@@ -13,8 +13,9 @@ namespace LightFencing.Players
     {
         public static Player LocalPlayer { get; set; }
 
-        private IDeviceTransformProvider _deviceTransformProvider;
-        private AbstractPlayerController _controller;
+        private IPlayerController _controller;
+        private Color _color;
+        private BaseEquipmentPart[] _equipmentParts;
 
         [field: SerializeField]
         public Sword Sword { get; private set; }
@@ -25,19 +26,28 @@ namespace LightFencing.Players
         [field: SerializeField]
         public Armor Armor { get; private set; }
 
-        [field: SerializeField]
-        public Color Color { get; private set; }
-
         public string Id { get; private set; }
+
+        public Color Color
+        {
+            get => _color;
+            set
+            {
+                _color = value;
+                foreach (var part in _equipmentParts)
+                {
+                    part.Color = _color;
+                }
+            }
+        }
 
         [UsedImplicitly]
         [Inject]
-        private void Construct(string id, bool isLocalPlayer, AbstractPlayerController controller, IDeviceTransformProvider deviceTransformProvider)
+        private void Construct(string id, bool isLocalPlayer, IPlayerController controller)
         {
             Debug.Log("Constructing player");
-
+            _equipmentParts = new BaseEquipmentPart[] { Sword, Shield, Armor };
             _controller = controller;
-            _deviceTransformProvider = deviceTransformProvider;
 
             if (isLocalPlayer)
                 LocalPlayer = this;
@@ -46,8 +56,7 @@ namespace LightFencing.Players
 
         private void OnDestroy()
         {
-            if (_controller != null)
-                _controller.Clear();
+            _controller?.Clear();
         }
 
         public void Initialize(string id)
@@ -59,16 +68,16 @@ namespace LightFencing.Players
 
         private void SetupEquipment()
         {
-            //I could use base class and iterate over collection, but it's just those three pieces and I don't plan on adding more
-            Sword.Setup(this);
-            Shield.Setup(this);
-            Armor.Setup(this);
+            foreach (var part in _equipmentParts)
+            {
+                part.Setup(this);
+            }
             Sword.AttachToPlayer(_controller.SwordHandTransform);
             Shield.AttachToPlayer(_controller.ShieldHandTransform);
             Armor.AttachToPlayer(_controller.HeadTransform);
         }
 
-        public class PlayerFactory : PlaceholderFactory<string, bool, AbstractPlayerController, Player>
+        public class PlayerFactory : PlaceholderFactory<string, bool, IPlayerController, Player>
         {
         }
 

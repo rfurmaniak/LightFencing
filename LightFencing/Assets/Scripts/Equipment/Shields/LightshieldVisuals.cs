@@ -36,7 +36,7 @@ namespace LightFencing
         private ParticleSystem bladeHitEffect;
 
         private Color _shieldColor;
-        public Color ShieldColor
+        public Color Color
         {
             get => _shieldColor;
             set

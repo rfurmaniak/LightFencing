@@ -36,7 +36,7 @@ namespace LightFencing.Equipment.Swords
         private ParticleSystem trailEffect;
 
         private Color _swordColor;
-        public Color SwordColor
+        public Color Color
         {
             get => _swordColor;
             set

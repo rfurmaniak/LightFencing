@@ -11,7 +11,7 @@ namespace LightFencing.Equipment.Shields
         private Color _startColor;
         private Material _shieldMaterial;
 
-        public Color ShieldColor { get; set; }
+        public Color Color { get; set; }
 
         private void Awake()
         {

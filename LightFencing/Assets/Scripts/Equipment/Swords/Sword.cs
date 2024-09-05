@@ -5,7 +5,6 @@ using LightFencing.Equipment.Armors;
 using LightFencing.Equipment.Shields;
 using LightFencing.Players;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace LightFencing.Equipment.Swords
@@ -30,6 +29,7 @@ namespace LightFencing.Equipment.Swords
         private bool _armorHasBeenHit;
         private bool _armorCooldownActivated;
 
+        protected override IBaseEquipmentVisuals Visuals => _visuals;
         private float DischargeTime => _mainConfig.SwordDischargeTime;
         private bool AllowSelfHit => _mainConfig.AllowSelfHit;
 
@@ -39,12 +39,6 @@ namespace LightFencing.Equipment.Swords
         {
             _mainConfig = mainConfig;
             _visuals = visuals;
-        }
-
-        public override void Setup(Player player)
-        {
-            base.Setup(player);
-            _visuals.SwordColor = player.Color;
         }
 
         public override void Activate()
@@ -144,7 +138,7 @@ namespace LightFencing.Equipment.Swords
 
         private void HandleCollisionEnterWithArmor(Collision collision)
         {
-            if (_armorHasBeenHit) 
+            if (_armorHasBeenHit)
                 return;
             var armor = collision.collider.GetComponent<ArmorReference>().Armor;
             if (CheckForLocalEquipment(armor))
@@ -157,7 +151,7 @@ namespace LightFencing.Equipment.Swords
 
         private async void HandleCollisionExitWithArmor(Collider other)
         {
-            if (_armorCooldownActivated) 
+            if (_armorCooldownActivated)
                 return;
             var armor = other.GetComponent<ArmorReference>().Armor;
             if (CheckForLocalEquipment(armor))
