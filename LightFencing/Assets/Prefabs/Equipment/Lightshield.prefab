@@ -14770,7 +14770,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4810806453081718348}
   - component: {fileID: 1791418572533671669}
-  - component: {fileID: 1343482025969592334}
   - component: {fileID: 2522085340434754138}
   - component: {fileID: 1424410618366494151}
   - component: {fileID: 4098077687524520202}
@@ -14793,7 +14792,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.16486658, y: 1.49, z: 0.7980801}
-  m_LocalScale: {x: 0.09, y: 0.09, z: 0.09}
+  m_LocalScale: {x: 0.089999996, y: 0.089999996, z: 0.09}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7623349506959015406}
@@ -14821,24 +14820,6 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!114 &1343482025969592334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3975273280962361210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 1424410618366494151}
-  _identifier: 
-  _useSceneContext: 1
-  _context: {fileID: 0}
-  _bindType: 0
 --- !u!114 &2522085340434754138
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockRotation: 0
-  positionOffset: {x: 0, y: -0.14, z: 0.09}
+  positionOffset: {x: 0, y: -0.1, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &3349510791040759977
 GameObject:
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockRotation: 5
-  positionOffset: {x: 0, y: -0.63, z: 0.22}
+  positionOffset: {x: 0, y: -0.65, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &4115963577149845585
 GameObject:
@@ -5191,7 +5191,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9222461999496900304}
   - component: {fileID: 5361133326899208302}
-  - component: {fileID: 3319826426406511671}
   - component: {fileID: 6007959800064660233}
   - component: {fileID: 8549328302766164404}
   - component: {fileID: 6726498959991666067}
@@ -5210,9 +5209,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5989359383671493964}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.346, z: 0}
-  m_LocalScale: {x: 1.2687, y: 1.2687, z: 1.2687}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6638334007571166854}
@@ -5237,24 +5236,6 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!114 &3319826426406511671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5989359383671493964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 8549328302766164404}
-  _identifier: 
-  _useSceneContext: 1
-  _context: {fileID: 0}
-  _bindType: 0
 --- !u!114 &6007959800064660233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5330,7 +5311,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.023, z: 0}
-  m_LocalScale: {x: 0.99293, y: 0.99293, z: 0.99293}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 264265101174760454}
