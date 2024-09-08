@@ -26,6 +26,7 @@ namespace LightFencing.Equipment.Swords
         private bool _armorHasBeenHit;
         private bool _armorCooldownActivated;
 
+        public Transform SwordTransform => transform;
         protected override IBaseEquipmentVisuals Visuals => _visuals;
         private float DischargeTime => _mainConfig.SwordDischargeTime;
         private bool AllowSelfHit => _mainConfig.AllowSelfHit;

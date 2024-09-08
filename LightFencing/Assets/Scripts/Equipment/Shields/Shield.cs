@@ -18,6 +18,7 @@ namespace LightFencing.Equipment.Shields
         private IShieldVisuals _visuals;
         private bool _shieldActivated;
 
+        public Transform ShieldTransform => transform;
         protected override IBaseEquipmentVisuals Visuals => _visuals;
 
         [UsedImplicitly]

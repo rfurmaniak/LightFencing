@@ -16,6 +16,9 @@ namespace LightFencing.Equipment.Armors
 
         private IArmorVisuals _visuals;
 
+        public Transform HelmetTransform => helmetTracker.transform;
+        public Transform BodyTransform => bodyPartTracker.transform;
+
         protected override IBaseEquipmentVisuals Visuals => _visuals;
 
         [UsedImplicitly]
