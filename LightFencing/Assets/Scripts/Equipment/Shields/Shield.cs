@@ -42,6 +42,7 @@ namespace LightFencing.Equipment.Shields
             armorCollider.enabled = true;
             Battery.StartUsingBattery();
             _visuals.LightUp();
+            InvokeActivated();
         }
 
         public override void Deactivate()
@@ -52,6 +53,7 @@ namespace LightFencing.Equipment.Shields
             armorCollider.enabled = false;
             Battery.StopUsingBattery();
             _visuals.LightDown();
+            InvokeDeactivated();
         }
     }
 }

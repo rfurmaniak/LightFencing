@@ -45,7 +45,6 @@ namespace LightFencing.Core.Managers
         private void Start()
         {
             _deviceTransformProvider.Origin.transform.position = playerASpawnPoint.position;
-            //_deviceTransformProvider.Origin.MatchOriginUpCameraForward(playerASpawnPoint.up, playerASpawnPoint.forward);
             InitializeLocalPlayer();
             InitializeOpponent();
         }

@@ -56,22 +56,28 @@ namespace LightFencing.Equipment.Swords
             _bladeActive = true;
             Battery.StartUsingBattery();
             _visuals.TurnBladeOn();
+            InvokeActivated();
         }
 
         public void TurnBladeOff()
         {
             if (_bladeDischarged || !_bladeActive)
                 return;
+            DeactivationActions();
+            _visuals.TurnBladeOff();
+        }
+
+        private void DeactivationActions()
+        {
             _bladeActive = false;
             Battery.StopUsingBattery();
-            _visuals.TurnBladeOff();
+            InvokeDeactivated();
         }
 
         private void DischargeBlade()
         {
             _bladeDischarged = true;
-            _bladeActive = false;
-            Battery.StopUsingBattery();
+            DeactivationActions();
             _visuals.DischargeBlade();
         }
 
@@ -169,7 +175,7 @@ namespace LightFencing.Equipment.Swords
 
         private bool CheckForLocalEquipment(BaseEquipmentPart equipmentPart)
         {
-            return !AllowSelfHit && equipmentPart.PlayerId == Player.LocalPlayer.Id;
+            return !AllowSelfHit && equipmentPart.PlayerId == PlayerId;
         }
     }
 }

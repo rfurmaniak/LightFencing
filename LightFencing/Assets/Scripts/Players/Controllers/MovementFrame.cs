@@ -1,18 +1,20 @@
+using LightFencing.Equipment;
 using UnityEngine;
 
 namespace LightFencing.Utils
 {
     public class MovementFrame
     {
-        public long Timestamp;
-        public SerializableVector3 HeadPosition;
-        public SerializableVector3 BodyPosition;
-        public SerializableVector3 HeadRotation;
-        public SerializableVector3 BodyRotation;
-        public SerializableVector3 LeftHandPosition;
-        public SerializableVector3 RightHandPosition;
-        public SerializableVector3 LeftHandRotation;
-        public SerializableVector3 RightHandRotation;
+        public long Timestamp { get; set; }
+        public SerializableVector3 HeadPosition { get; set; }
+        public SerializableVector3 BodyPosition { get; set; }
+        public SerializableVector3 HeadRotation { get; set; }
+        public SerializableVector3 BodyRotation { get; set; }
+        public SerializableVector3 LeftHandPosition { get; set; }
+        public SerializableVector3 RightHandPosition { get; set; }
+        public SerializableVector3 LeftHandRotation { get; set; }
+        public SerializableVector3 RightHandRotation { get; set; }
+        public EquipmentAction Actions { get; set; }
 
         public MovementFrame()
         {
@@ -27,7 +29,8 @@ namespace LightFencing.Utils
             SerializableVector3 leftHandPosition,
             SerializableVector3 rightHandPosition,
             SerializableVector3 leftHandRotation,
-            SerializableVector3 rightHandRotation)
+            SerializableVector3 rightHandRotation,
+            EquipmentAction equipmentActions)
         {
             Timestamp = timestamp;
             HeadPosition = headPosition;
@@ -38,9 +41,10 @@ namespace LightFencing.Utils
             RightHandPosition = rightHandPosition;
             LeftHandRotation = leftHandRotation;
             RightHandRotation = rightHandRotation;
+            Actions = equipmentActions;
         }
 
-        public MovementFrame(long timestamp, Transform referenceTransform, Transform headTransform, Transform bodyTransform, Transform leftHandTransform, Transform rightHandTransform)
+        public MovementFrame(long timestamp, Transform referenceTransform, Transform headTransform, Transform bodyTransform, Transform leftHandTransform, Transform rightHandTransform, EquipmentAction actions)
         {
             Timestamp = timestamp;
             HeadPosition = referenceTransform.InverseTransformPoint(headTransform.position);
@@ -52,6 +56,8 @@ namespace LightFencing.Utils
             BodyRotation = (Quaternion.Inverse(referenceTransform.rotation) * bodyTransform.rotation).eulerAngles;
             RightHandRotation = (Quaternion.Inverse(referenceTransform.rotation) * rightHandTransform.rotation).eulerAngles;
             LeftHandRotation = (Quaternion.Inverse(referenceTransform.rotation) * leftHandTransform.rotation).eulerAngles;
+
+            Actions = actions;
         }
     }
 }

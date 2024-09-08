@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using LightFencing.Equipment;
 using LightFencing.Utils;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace LightFencing.Players.Controllers
 
         public Transform ShieldHandTransform => shieldHandTransform;
 
+        private Player _player;
         private bool _isPlaying;
         private int _currentFrameIndex;
         private List<MovementFrame> _frames;
@@ -39,7 +41,11 @@ namespace LightFencing.Players.Controllers
 
         public async void Initialize(Player player)
         {
-            await LoadRecording(Path.Combine(Application.persistentDataPath, "recording.json"));
+            _player = player;
+            var path = Path.Combine(Application.persistentDataPath, "recording.json");
+            if (!File.Exists(path))
+                return;
+            await LoadRecording(path);
             _isPlaying = true;
         }
 
@@ -67,7 +73,24 @@ namespace LightFencing.Players.Controllers
             swordHandTransform.rotation = referenceTransform.rotation * Quaternion.Euler(currentFrame.RightHandRotation);
             shieldHandTransform.rotation = referenceTransform.rotation * Quaternion.Euler(currentFrame.LeftHandRotation);
 
+            ParseActions(currentFrame.Actions);
+
             _currentFrameIndex++;
+        }
+
+        private void ParseActions(EquipmentAction action)
+        {
+            if (action == EquipmentAction.None)
+                return;
+
+            if (action.HasFlag(EquipmentAction.SwordActivated))
+                _player.Sword.Activate();
+            if (action.HasFlag(EquipmentAction.SwordDeactivated))
+                _player.Sword.Deactivate();
+            if (action.HasFlag(EquipmentAction.ShieldActivated))
+                _player.Shield.Activate();
+            if (action.HasFlag(EquipmentAction.ShieldDeactivated))
+                _player.Shield.Deactivate();
         }
     }
 }

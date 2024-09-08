@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02745cf61fbf25c48a58113234f6ef66, type: 3}
   m_Name: MainConfig
   m_EditorClassIdentifier: 
-  <AllowSelfHit>k__BackingField: 1
+  <AllowSelfHit>k__BackingField: 0
   <SwordDischargeTime>k__BackingField: 2
   <ArmorHitCooldown>k__BackingField: 2
   <BatteryDrainSpeed>k__BackingField: 2
   <BatteryRechargeSpeed>k__BackingField: 1
   <MaxBatteryLevel>k__BackingField: 200
   <BatteryUpdateMillisecondsInterval>k__BackingField: 100
+  <MaxHealth>k__BackingField: 0
