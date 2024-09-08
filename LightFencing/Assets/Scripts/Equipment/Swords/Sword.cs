@@ -21,9 +21,6 @@ namespace LightFencing.Equipment.Swords
 
         private MainConfig _mainConfig;
 
-        private float _maxBatteryLevel;
-        private float _currentBatteryLevel;
-
         private bool _bladeActive;
         private bool _bladeDischarged;
         private bool _armorHasBeenHit;
@@ -53,9 +50,10 @@ namespace LightFencing.Equipment.Swords
 
         public void TryTurnBladeOn()
         {
-            if (_bladeDischarged || _bladeActive)
+            if (_bladeDischarged || _bladeActive && Battery.CurrentBatteryLevel > 0)
                 return;
             _bladeActive = true;
+            Battery.StartUsingBattery();
             _visuals.TurnBladeOn();
         }
 
@@ -64,6 +62,7 @@ namespace LightFencing.Equipment.Swords
             if (_bladeDischarged || !_bladeActive)
                 return;
             _bladeActive = false;
+            Battery.StopUsingBattery();
             _visuals.TurnBladeOff();
         }
 
@@ -71,6 +70,7 @@ namespace LightFencing.Equipment.Swords
         {
             _bladeDischarged = true;
             _bladeActive = false;
+            Battery.StopUsingBattery();
             _visuals.DischargeBlade();
         }
 

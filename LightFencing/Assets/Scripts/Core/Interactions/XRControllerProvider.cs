@@ -1,3 +1,4 @@
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -11,8 +12,13 @@ namespace LightFencing.Core.Interactions
         [SerializeField]
         private XRBaseController rightController;
 
+        [SerializeField] 
+        private XROrigin origin;
+
         [SerializeField]
         private Camera deviceCamera;
+
+        public XROrigin Origin => origin;
 
         public Transform GetControllerTransform(Handedness handedness)
         {

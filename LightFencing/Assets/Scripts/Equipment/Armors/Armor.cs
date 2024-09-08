@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using LightFencing.Players;
 using LightFencing.Utils;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +9,8 @@ namespace LightFencing.Equipment.Armors
 {
     public class Armor : BaseEquipmentPart
     {
+        public event Action ArmorHit;
+
         [SerializeField]
         private BodyPartTracker helmetTracker;
 
@@ -38,6 +41,7 @@ namespace LightFencing.Equipment.Armors
         {
             Debug.Log("Armor hit!");
             _visuals.BladeHit(hitPosition);
+            ArmorHit?.Invoke();
         }
     }
 }

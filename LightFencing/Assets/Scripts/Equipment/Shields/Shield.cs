@@ -16,6 +16,7 @@ namespace LightFencing.Equipment.Shields
         private Collider armorCollider;
 
         private IShieldVisuals _visuals;
+        private bool _shieldActivated;
 
         protected override IBaseEquipmentVisuals Visuals => _visuals;
 
@@ -34,13 +35,21 @@ namespace LightFencing.Equipment.Shields
 
         public override void Activate()
         {
+            if (_shieldActivated)
+                return;
+            _shieldActivated = true;
             armorCollider.enabled = true;
+            Battery.StartUsingBattery();
             _visuals.LightUp();
         }
 
         public override void Deactivate()
         {
+            if (!_shieldActivated)
+                return;
+            _shieldActivated = false;
             armorCollider.enabled = false;
+            Battery.StopUsingBattery();
             _visuals.LightDown();
         }
     }

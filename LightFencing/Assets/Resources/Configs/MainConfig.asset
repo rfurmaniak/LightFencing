@@ -15,3 +15,7 @@ MonoBehaviour:
   <AllowSelfHit>k__BackingField: 1
   <SwordDischargeTime>k__BackingField: 2
   <ArmorHitCooldown>k__BackingField: 2
+  <BatteryDrainSpeed>k__BackingField: 2
+  <BatteryRechargeSpeed>k__BackingField: 1
+  <MaxBatteryLevel>k__BackingField: 200
+  <BatteryUpdateMillisecondsInterval>k__BackingField: 100

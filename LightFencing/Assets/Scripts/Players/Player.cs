@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using LightFencing.Core.Configs;
 using LightFencing.Equipment;
 using LightFencing.Equipment.Armors;
 using LightFencing.Equipment.Shields;
@@ -26,7 +27,14 @@ namespace LightFencing.Players
         [field: SerializeField]
         public Armor Armor { get; private set; }
 
+        [field: SerializeField]
+        public Battery Battery { get; private set; }
+
         public string Id { get; private set; }
+
+        public int CurrentHealth { get; private set; }
+
+        public int MaxHealth { get; private set; }
 
         public Color Color
         {
@@ -43,11 +51,13 @@ namespace LightFencing.Players
 
         [UsedImplicitly]
         [Inject]
-        private void Construct(string id, bool isLocalPlayer, IPlayerController controller)
+        private void Construct(MainConfig mainConfig, string id, bool isLocalPlayer, IPlayerController controller)
         {
             Debug.Log("Constructing player");
             _equipmentParts = new BaseEquipmentPart[] { Sword, Shield, Armor };
             _controller = controller;
+
+            CurrentHealth = MaxHealth = mainConfig.MaxHealth;
 
             if (isLocalPlayer)
                 LocalPlayer = this;
@@ -57,6 +67,8 @@ namespace LightFencing.Players
         private void OnDestroy()
         {
             _controller?.Clear();
+            if (Armor)
+                Armor.ArmorHit -= OnArmorHit;
         }
 
         public void Initialize(string id)
@@ -75,6 +87,13 @@ namespace LightFencing.Players
             Sword.AttachToPlayer(_controller.SwordHandTransform);
             Shield.AttachToPlayer(_controller.ShieldHandTransform);
             Armor.AttachToPlayer(_controller.HeadTransform);
+
+            Armor.ArmorHit += OnArmorHit;
+        }
+
+        private void OnArmorHit()
+        {
+            CurrentHealth = Mathf.Clamp(CurrentHealth - 1, 0, MaxHealth);
         }
 
         public class PlayerFactory : PlaceholderFactory<string, bool, IPlayerController, Player>
