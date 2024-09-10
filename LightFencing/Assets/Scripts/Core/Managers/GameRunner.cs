@@ -2,8 +2,8 @@ using JetBrains.Annotations;
 using LightFencing.Core.Interactions;
 using LightFencing.Players;
 using LightFencing.Players.Controllers;
+using LightFencing.UI;
 using System;
-using Unity.XR.CoreUtils;
 using UnityEngine;
 using Zenject;
 
@@ -23,6 +23,9 @@ namespace LightFencing.Core.Managers
         [SerializeField]
         private Transform playerBSpawnPoint;
 
+        [SerializeField]
+        private HUDController hudController;
+
         private Player.PlayerFactory _playerFactory;
         private LocalPlayerController _playerController;
         private IEnemyController _enemyController;
@@ -32,7 +35,7 @@ namespace LightFencing.Core.Managers
         [Inject]
         private void Construct(
             IDeviceTransformProvider deviceTransformProvider,
-            LocalPlayerController localPlayerController, 
+            LocalPlayerController localPlayerController,
             IEnemyController enemyController,
             Player.PlayerFactory playerFactory)
         {
@@ -55,6 +58,7 @@ namespace LightFencing.Core.Managers
             localPlayer.transform.SetPositionAndRotation(playerASpawnPoint.position, playerASpawnPoint.rotation);
             localPlayer.Color = playerAColor;
             Player.LocalPlayer = localPlayer;
+            hudController.Setup(localPlayer);
         }
 
         private void InitializeOpponent()

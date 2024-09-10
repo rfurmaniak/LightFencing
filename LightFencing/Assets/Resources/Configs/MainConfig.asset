@@ -16,7 +16,8 @@ MonoBehaviour:
   <SwordDischargeTime>k__BackingField: 2
   <ArmorHitCooldown>k__BackingField: 2
   <BatteryDrainSpeed>k__BackingField: 2
-  <BatteryRechargeSpeed>k__BackingField: 1
+  <BatteryRechargeSpeed>k__BackingField: 8
   <MaxBatteryLevel>k__BackingField: 200
-  <BatteryUpdateMillisecondsInterval>k__BackingField: 100
-  <MaxHealth>k__BackingField: 0
+  <BatteryUpdateMillisecondsInterval>k__BackingField: 10
+  <BatteryDrainedMillisecondsTime>k__BackingField: 500
+  <MaxHealth>k__BackingField: 10

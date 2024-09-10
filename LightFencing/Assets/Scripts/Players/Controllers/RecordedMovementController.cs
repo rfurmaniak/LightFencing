@@ -36,7 +36,7 @@ namespace LightFencing.Players.Controllers
         public void Clear()
         {
             _isPlaying = false;
-            _frames.Clear();
+            _frames?.Clear();
         }
 
         public async void Initialize(Player player)

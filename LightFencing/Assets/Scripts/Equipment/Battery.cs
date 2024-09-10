@@ -5,6 +5,7 @@ using System;
 using System.Threading;
 using UnityEngine;
 using Zenject;
+using LightFencing.Utils;
 
 namespace LightFencing
 {
@@ -12,12 +13,10 @@ namespace LightFencing
     {
         public event Action BatteryDrained;
 
-        [SerializeField]
-        private MeshRenderer batteryVisualizerTest;
-
         private int _batteryDrainSpeed;
         private int _batteryRechargeSpeed;
         private int _millisecondsInterval;
+        private int _batteryDrainedTime;
         private int _numberOfBatteryDrainers;
 
         private CancellationTokenSource _cancellationTokenSource;
@@ -27,6 +26,7 @@ namespace LightFencing
         public int CurrentBatteryLevel { get; private set; }
 
         public bool IsBatteryUsed { get; private set; }
+        public bool IsBatteryDrained { get; private set; }
         public bool IsPaused { get; set; }
 
         [UsedImplicitly]
@@ -37,6 +37,7 @@ namespace LightFencing
             _batteryDrainSpeed = mainConfig.BatteryDrainSpeed;
             _batteryRechargeSpeed = mainConfig.BatteryRechargeSpeed;
             _millisecondsInterval = mainConfig.BatteryUpdateMillisecondsInterval;
+            _batteryDrainedTime = mainConfig.BatteryDrainedMillisecondsTime;
             _cancellationTokenSource = new CancellationTokenSource();
             HandleBatteryLevel(_cancellationTokenSource.Token).Forget();
         }
@@ -54,19 +55,22 @@ namespace LightFencing
                 if (cancellationToken.IsCancellationRequested)
                     return;
 
-                if (!IsPaused)
+                if (!IsPaused && !IsBatteryDrained)
                 {
                     if (IsBatteryUsed)
                     {
                         CurrentBatteryLevel = Mathf.Clamp(CurrentBatteryLevel - _batteryDrainSpeed, 0, MaxBatteryLevel);
                         if (CurrentBatteryLevel == 0)
-                            BatteryDrained?.Invoke();
+                        {
+                            HandleBatteryDrained();
+                        }
                     }
                     else
+                    {
                         CurrentBatteryLevel = Mathf.Clamp(CurrentBatteryLevel + _batteryRechargeSpeed, 0, MaxBatteryLevel);
+                    }
                 }
 
-                batteryVisualizerTest.material.color = Color.Lerp(Color.red, Color.green, Remap(CurrentBatteryLevel, 0, MaxBatteryLevel, 0, 1));
                 await UniTask.Delay(_millisecondsInterval);
             }
         }
@@ -90,19 +94,26 @@ namespace LightFencing
             }
         }
 
-        public static float Remap(float from, float fromMin, float fromMax, float toMin, float toMax)
+        private void HandleBatteryDrained()
         {
-            var fromAbs = from - fromMin;
-            var fromMaxAbs = fromMax - fromMin;
+            IsBatteryDrained = true;
+            BatteryDrained?.Invoke();
 
-            var normal = fromAbs / fromMaxAbs;
+            BatteryDrainCooldown(_cancellationTokenSource.Token).Forget();
+        }
 
-            var toMaxAbs = toMax - toMin;
-            var toAbs = toMaxAbs * normal;
-
-            var to = toAbs + toMin;
-
-            return to;
+        private async UniTask BatteryDrainCooldown(CancellationToken cancellationToken)
+        {
+            try
+            {
+                await UniTask.Delay(_batteryDrainedTime, cancellationToken: cancellationToken);
+            }
+            catch(Exception _)
+            {
+                Debug.Log("Battery drain regain cancelled");
+                return;
+            }
+            IsBatteryDrained = false;
         }
     }
 }

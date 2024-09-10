@@ -5,6 +5,7 @@ using LightFencing.Equipment.Armors;
 using LightFencing.Equipment.Shields;
 using LightFencing.Equipment.Swords;
 using LightFencing.Players.Controllers;
+using LightFencing.UI;
 using UnityEngine;
 using Zenject;
 

@@ -27,6 +27,9 @@ namespace LightFencing.Core.Configs
         public int BatteryUpdateMillisecondsInterval { get; private set; }
 
         [field: SerializeField]
+        public int BatteryDrainedMillisecondsTime { get; private set; }
+
+        [field: SerializeField]
         public int MaxHealth { get; private set; }
     }
 }
