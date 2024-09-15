@@ -10,4 +10,5 @@ public const string T_GameController = @"GameController";
 public const string T_Shield = @"Shield";
 public const string T_Armor = @"Armor";
 public const string T_Blade = @"Blade";
+public const string T_SamplesInfoPanel = @"SamplesInfoPanel";
 }
