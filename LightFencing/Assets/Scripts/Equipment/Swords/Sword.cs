@@ -79,6 +79,8 @@ namespace LightFencing.Equipment.Swords
             _bladeDischarged = true;
             DeactivationActions();
             _visuals.DischargeBlade();
+
+            RestoreBlade(DischargeTime).Forget();
         }
 
         private async UniTask RestoreBlade(float restorationTime)
@@ -113,11 +115,6 @@ namespace LightFencing.Equipment.Swords
         private void OnCollisionExit(Collision collision)
         {
             var other = collision.collider;
-            if (other.CompareTag(Tags.T_Shield))
-            {
-                HandleCollisionExitWithShield(other);
-                return;
-            }
 
             if (other.CompareTag(Tags.T_Armor))
             {
