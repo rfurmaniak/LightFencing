@@ -39,6 +39,9 @@ namespace LightFencing
         [SerializeField]
         private Vector3 shieldTargetRotationOffset;
 
+        [SerializeField]
+        private Animator animator;
+
         public Transform HeadTransform => headTransform;
 
         public Transform SwordHandTransform => swordHandTransform;
@@ -90,11 +93,11 @@ namespace LightFencing
         }
 
         private void TrackShield()
-        {
+        {          
             shieldHandTarget.position = _opponent.Sword.SwordTransform.position;
-            var direction = _opponent.Sword.SwordTransform.position - shieldHandTransform.position;
-            var lookRotation = Quaternion.LookRotation(direction).eulerAngles + shieldTargetRotationOffset;
-            shieldHandTarget.rotation = Quaternion.Euler(lookRotation);
+          //  var direction = _opponent.Sword.SwordTransform.position - shieldHandTransform.position;
+          //  var lookRotation = Quaternion.LookRotation(direction).eulerAngles + shieldTargetRotationOffset;
+          //  shieldHandTarget.rotation = Quaternion.Euler(lookRotation);
         }
 
         private void OnOpponentSwordDeactivated()

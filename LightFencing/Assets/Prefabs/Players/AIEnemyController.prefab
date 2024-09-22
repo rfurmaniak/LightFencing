@@ -67,14 +67,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f275e84e2ec8c9c42abfad2f302e9c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackMotions: []
+  dischargeReaction: {fileID: 0}
   referenceTransform: {fileID: 0}
   headTransform: {fileID: 4389252428271955093}
   swordHandTransform: {fileID: 4786094898714657242}
+  swordHandTarget: {fileID: 0}
   shieldHandTransform: {fileID: 2724721664674921364}
   shieldHandTarget: {fileID: 5387890379346445849}
   shieldTargetRotationOffset: {x: 0, y: 130, z: 65}
-  minHandReach: 0
-  maxHandReach: 0
+  animator: {fileID: 0}
 --- !u!1 &149158211897466580
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,12 +101,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149158211897466580}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.34547263, y: -0.6697564, z: -0.07237012, w: 0.6533282}
-  m_LocalPosition: {x: 0.0060092113, y: 0.117016256, z: -0.044955976}
+  m_LocalRotation: {x: 0.282384, y: -0.94538814, z: 0.16190825, w: -0.016923634}
+  m_LocalPosition: {x: 0.04818555, y: 0.3110592, z: 0.013458717}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6984046654366733549}
+  m_Father: {fileID: 1916113182779040329}
   m_LocalEulerAnglesHint: {x: 20.761, y: -98.354, z: -36.586}
 --- !u!1 &219480485326106729
 GameObject:
@@ -605,13 +607,7 @@ PrefabInstance:
     - target: {fileID: 6295540562964205265, guid: a542cbbb5b207e742a01a0f32f8d15eb,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'B-upperArm.L'\n\tTransform 'B-hand.L'\n\tTransform
-        'B-upperArm.R'\n\tTransform 'B-forearm.R'\n\tTransform 'B-forearm.L'\n\tTransform
-        'B-hand.R'\n\tTransform 'B-upperArm.L'\n\tTransform 'B-hand.L'\n\tTransform
-        'B-upperArm.R'\n\tTransform 'B-forearm.R'\n\tand more ...\n\tFrom animation
-        clip 'SwordSwingDiagonal'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6556506701442986633, guid: a542cbbb5b207e742a01a0f32f8d15eb,
         type: 3}
@@ -625,9 +621,9 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1961445261192201984}
-    - targetCorrespondingSourceObject: {fileID: 7674019960370719677, guid: a542cbbb5b207e742a01a0f32f8d15eb,
+    - targetCorrespondingSourceObject: {fileID: 1154240758464863513, guid: a542cbbb5b207e742a01a0f32f8d15eb,
         type: 3}
-      insertIndex: -1
+      insertIndex: 0
       addedObject: {fileID: 2724721664674921364}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6556506701442986633, guid: a542cbbb5b207e742a01a0f32f8d15eb,

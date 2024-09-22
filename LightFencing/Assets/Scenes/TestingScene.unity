@@ -11596,6 +11596,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7563243291789127911}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &2134362006 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6759210187261014401, guid: 6663c004c5bb8624690cb5a5e9419a65,
+    type: 3}
+  m_PrefabInstance: {fileID: 7563243291789127911}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &196977305468683332
 GameObject:
   m_ObjectHideFlags: 0
@@ -13579,6 +13585,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 2134362006}
+    - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
+        type: 3}
       propertyPath: swordHandTarget
       value: 
       objectReference: {fileID: 1098778623}
@@ -13731,6 +13742,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.169
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387890379346445849, guid: 6663c004c5bb8624690cb5a5e9419a65,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387890379346445849, guid: 6663c004c5bb8624690cb5a5e9419a65,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387890379346445849, guid: 6663c004c5bb8624690cb5a5e9419a65,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387890379346445849, guid: 6663c004c5bb8624690cb5a5e9419a65,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6759210187261014401, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
