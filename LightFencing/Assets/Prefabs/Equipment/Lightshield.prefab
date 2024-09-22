@@ -132,7 +132,7 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
@@ -14851,8 +14851,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPartTracker: {fileID: 4098077687524520202}
-  activateAction: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
   shieldGenerator: {fileID: 4605997767063164966}
   shieldArmor: {fileID: 974537241358095807}
   armorCollider: {fileID: 219851002915843447}

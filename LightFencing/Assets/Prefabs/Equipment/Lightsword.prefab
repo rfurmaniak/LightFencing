@@ -24594,8 +24594,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPartTracker: {fileID: 493444387255855613}
-  activateAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
   blade: {fileID: 5441330072825640655}
   handle: {fileID: 8635079704370092208}
 --- !u!114 &493444387255855613
@@ -24678,7 +24676,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

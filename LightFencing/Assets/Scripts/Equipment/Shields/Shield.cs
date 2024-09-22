@@ -36,7 +36,7 @@ namespace LightFencing.Equipment.Shields
 
         public override void Activate()
         {
-            if (_shieldActivated)
+            if (_shieldActivated && Battery.CurrentBatteryLevel > 0)
                 return;
             _shieldActivated = true;
             armorCollider.enabled = true;

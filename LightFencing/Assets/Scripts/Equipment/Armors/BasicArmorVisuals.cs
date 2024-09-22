@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using static LightFencing.Utils.ColorLerp;
+using static LightFencing.Utils.LerpUtils;
 
 namespace LightFencing.Equipment.Armors
 {

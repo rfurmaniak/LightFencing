@@ -31,6 +31,8 @@ namespace LightFencing.Players.Controllers
         private bool _isRecording;
         private EquipmentAction _currentActions;
 
+        private int _counter;
+
         [Inject]
         private void Construct(IDeviceTransformProvider transformProvider)
         {
@@ -82,7 +84,8 @@ namespace LightFencing.Players.Controllers
             UnregisterPlayerEvents();
             _isRecording = false;
             _stopwatch.Stop();
-            SaveRecording(Path.Join(Application.persistentDataPath, "recording.json")).Forget();
+            _counter++;
+            SaveRecording(Path.Join(Application.persistentDataPath, $"recording_{_counter}.json")).Forget();
         }
 
 

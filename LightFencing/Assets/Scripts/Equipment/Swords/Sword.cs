@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using LightFencing.Core.Configs;
 using LightFencing.Equipment.Armors;
 using LightFencing.Equipment.Shields;
-using LightFencing.Players;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +11,8 @@ namespace LightFencing.Equipment.Swords
 {
     public class Sword : ActivatableEquipmentPart
     {
+        public event Action SwordDischarged;
+
         [SerializeField]
         private GameObject blade;
 
@@ -22,10 +24,10 @@ namespace LightFencing.Equipment.Swords
         private MainConfig _mainConfig;
 
         private bool _bladeActive;
-        private bool _bladeDischarged;
         private bool _armorHasBeenHit;
         private bool _armorCooldownActivated;
 
+        public bool IsSwordDischarged { get; private set; }
         public Transform SwordTransform => transform;
         protected override IBaseEquipmentVisuals Visuals => _visuals;
         private float DischargeTime => _mainConfig.SwordDischargeTime;
@@ -51,7 +53,7 @@ namespace LightFencing.Equipment.Swords
 
         public void TryTurnBladeOn()
         {
-            if (_bladeDischarged || _bladeActive && Battery.CurrentBatteryLevel > 0)
+            if (IsSwordDischarged || _bladeActive && Battery.CurrentBatteryLevel > 0)
                 return;
             _bladeActive = true;
             Battery.StartUsingBattery();
@@ -61,7 +63,7 @@ namespace LightFencing.Equipment.Swords
 
         public void TurnBladeOff()
         {
-            if (_bladeDischarged || !_bladeActive)
+            if (IsSwordDischarged || !_bladeActive)
                 return;
             DeactivationActions();
             _visuals.TurnBladeOff();
@@ -76,7 +78,8 @@ namespace LightFencing.Equipment.Swords
 
         private void DischargeBlade()
         {
-            _bladeDischarged = true;
+            IsSwordDischarged = true;
+            SwordDischarged?.Invoke();
             DeactivationActions();
             _visuals.DischargeBlade();
 
@@ -86,14 +89,14 @@ namespace LightFencing.Equipment.Swords
         private async UniTask RestoreBlade(float restorationTime)
         {
             await UniTask.Delay((int)(restorationTime * 1000));
-            _bladeDischarged = false;
+            IsSwordDischarged = false;
             TurnBladeOff();
         }
 
         private void OnCollisionEnter(Collision collision)
         {
             //Only active blade reacts to triggers
-            if (!_bladeActive || _bladeDischarged)
+            if (!_bladeActive || IsSwordDischarged)
                 return;
 
             var other = collision.collider;
@@ -150,7 +153,6 @@ namespace LightFencing.Equipment.Swords
             _armorCooldownActivated = false;
             _armorHasBeenHit = true;
             armor.HandleBladeHit(collision.GetContact(0).point);
-            //This will decrease player's health
         }
 
         private async void HandleCollisionExitWithArmor(Collider other)
