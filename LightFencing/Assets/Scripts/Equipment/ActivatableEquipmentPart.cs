@@ -9,6 +9,8 @@ namespace LightFencing.Equipment
         public event Action Deactivated;
         protected Battery Battery;
 
+        public bool IsActivated { get; protected set; }
+
         public abstract void Activate();
 
         public abstract void Deactivate();
@@ -28,11 +30,13 @@ namespace LightFencing.Equipment
 
         protected void InvokeActivated()
         {
+            IsActivated = true;
             Activated?.Invoke();
         }
 
         protected void InvokeDeactivated()
         {
+            IsActivated = false;
             Deactivated?.Invoke();
         }
 

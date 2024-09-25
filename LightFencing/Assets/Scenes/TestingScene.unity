@@ -13590,9 +13590,34 @@ PrefabInstance:
       objectReference: {fileID: 2134362006}
     - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
+      propertyPath: panicDistance
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
+        type: 3}
+      propertyPath: maxDefenseDelay
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
+        type: 3}
+      propertyPath: minDefenseDelay
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
+        type: 3}
       propertyPath: swordHandTarget
       value: 
       objectReference: {fileID: 1098778623}
+    - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
+        type: 3}
+      propertyPath: maxReactionSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
+        type: 3}
+      propertyPath: minReactionSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
       propertyPath: dischargeReaction
@@ -13600,9 +13625,19 @@ PrefabInstance:
       objectReference: {fileID: 4900000, guid: c2f7d3dad6afecd47a5b380ac1330ee9, type: 3}
     - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
+      propertyPath: frameAttackChance
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
+        type: 3}
       propertyPath: referenceTransform
       value: 
       objectReference: {fileID: 663129427}
+    - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
+        type: 3}
+      propertyPath: panicSpeedMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2302324844526837391, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
       propertyPath: attackMotions.Array.size
@@ -13706,37 +13741,37 @@ PrefabInstance:
     - target: {fileID: 4711425892731449244, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5629877
+      value: 0.519
       objectReference: {fileID: 0}
     - target: {fileID: 4711425892731449244, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.03436041
+      value: 0.245
       objectReference: {fileID: 0}
     - target: {fileID: 4711425892731449244, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.12788141
+      value: 0.465
       objectReference: {fileID: 0}
     - target: {fileID: 4711425892731449244, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.39324394
+      value: -0.86629397
       objectReference: {fileID: 0}
     - target: {fileID: 4711425892731449244, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5724412
+      value: 0.047089662
       objectReference: {fileID: 0}
     - target: {fileID: 4711425892731449244, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7185944
+      value: -0.49720383
       objectReference: {fileID: 0}
     - target: {fileID: 4711425892731449244, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.035949938
+      value: -0.010280867
       objectReference: {fileID: 0}
     - target: {fileID: 5387890379346445849, guid: 6663c004c5bb8624690cb5a5e9419a65,
         type: 3}

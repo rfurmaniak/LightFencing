@@ -40,19 +40,65 @@ namespace LightFencing
         private Vector3 shieldTargetRotationOffset;
 
         [SerializeField]
+        private float minReactionSpeed = 0.1f;
+
+        [SerializeField]
+        private float maxReactionSpeed = 0.5f;
+
+        [SerializeField]
+        private float idleReactionSpeed = 0.05f;
+
+        [SerializeField]
+        private float maxTimeBetweenAttacks = 3.0f;
+
+        [SerializeField]
+        private float frameAttackChance = 0.01f;
+
+        [SerializeField]
+        private float dischargeReactionTime = 0.05f;
+
+        [SerializeField]
+        private float panicDistance = 0.3f;
+
+        [SerializeField]
+        private float panicChance = 0.25f;
+
+        [SerializeField]
+        private float panicTime = 0.5f;
+
+        [SerializeField]
+        private float panicSpeedMultiplier = 2.0f;
+
+        [SerializeField]
+        private float chanceToStopTheAttack = 0.1f;
+
+        [SerializeField]
+        private float minDefenseDelay = 0.1f;
+
+        [SerializeField]
+        private float maxDefenseDelay = 0.5f;
+
+        [SerializeField]
         private Animator animator;
+
+        private Player _thisPlayer;
+        private Player _opponent;
+
+        private float _currentReactionSpeed;
+        private float _lastAttackEnd;
+
+        private Vector3 _lastOpponentSwordPosition;
+
+        private bool _isAttacking;
+
+        private CancellationTokenSource _attackTokenSource;
 
         public Transform HeadTransform => headTransform;
 
         public Transform SwordHandTransform => swordHandTransform;
 
         public Transform ShieldHandTransform => shieldHandTransform;
-
-        private Player _thisPlayer;
-        private Player _opponent;
-
-        private bool _isAttacking;
-        private CancellationTokenSource _attackTokenSource;
+        private bool IsBlocking => _thisPlayer.Shield.IsActivated;
 
         public void Initialize(Player player)
         {
@@ -65,6 +111,12 @@ namespace LightFencing
 
             _opponent.Sword.Activated += OnOpponentSwordActivated;
             _opponent.Sword.Deactivated += OnOpponentSwordDeactivated;
+
+            _opponent.Shield.Activated += OnOpponentShieldActivated;
+
+            _lastOpponentSwordPosition = _opponent.Sword.SwordTransform.position;
+
+            RefreshReactionSpeed(true);
         }
 
         public void Clear()
@@ -75,11 +127,21 @@ namespace LightFencing
             }
             if (_opponent)
             {
-                _opponent.Sword.Activated += OnOpponentSwordActivated;
-                _opponent.Sword.Deactivated += OnOpponentSwordDeactivated;
+                _opponent.Sword.Activated -= OnOpponentSwordActivated;
+                _opponent.Sword.Deactivated -= OnOpponentSwordDeactivated;
+                _opponent.Shield.Activated -= OnOpponentShieldActivated;
             }
             _attackTokenSource.Cancel();
             _attackTokenSource.Dispose();
+        }
+
+        private void Update()
+        {
+            if (!_opponent)
+                return;
+            var target = _opponent.Armor.BodyTransform.position;
+            var lookAtTarget = new Vector3(target.x, transform.position.y, target.z);
+            transform.LookAt(lookAtTarget);
         }
 
         private void FixedUpdate()
@@ -88,35 +150,61 @@ namespace LightFencing
                 return;
 
             TrackShield();
-            if (!_isAttacking && !_thisPlayer.Sword.IsSwordDischarged)
+            if (!_isAttacking && !IsBlocking && !_thisPlayer.Sword.IsSwordDischarged && RollForAttack())
                 PerformRandomAttack(_attackTokenSource.Token).Forget();
         }
 
         private void TrackShield()
-        {          
-            shieldHandTarget.position = _opponent.Sword.SwordTransform.position;
-          //  var direction = _opponent.Sword.SwordTransform.position - shieldHandTransform.position;
-          //  var lookRotation = Quaternion.LookRotation(direction).eulerAngles + shieldTargetRotationOffset;
-          //  shieldHandTarget.rotation = Quaternion.Euler(lookRotation);
+        {
+            var opponentSwordPosition = _opponent.Sword.SwordTransform.position;
+            shieldHandTarget.position = Vector3.MoveTowards(shieldHandTarget.position, opponentSwordPosition, _currentReactionSpeed);
+            if (Vector3.Distance(_lastOpponentSwordPosition, opponentSwordPosition) >= panicDistance && Random.Range(0.0f, 1.0f) < panicChance)
+                PanicShielding().Forget();
+            _lastOpponentSwordPosition = opponentSwordPosition;
         }
 
-        private void OnOpponentSwordDeactivated()
+        private async void OnOpponentSwordDeactivated()
         {
+            await UniTask.Delay((int)(Random.Range(minDefenseDelay, maxDefenseDelay) * 1000));
             _thisPlayer.Shield.Deactivate();
+            RefreshReactionSpeed(true);
         }
 
-        private void OnOpponentSwordActivated()
+        private async void OnOpponentSwordActivated()
         {
+            await UniTask.Delay((int)(Random.Range(minDefenseDelay, maxDefenseDelay) * 1000));
             _thisPlayer.Shield.Activate();
+            RefreshReactionSpeed(false);
+        }
+
+        private void OnOpponentShieldActivated()
+        {
+            if (_isAttacking && Random.Range(0.0f, 1.0f) < chanceToStopTheAttack)
+                CancelAndResetAttackTokenSource();
         }
 
         private void OnSwordDischarged()
         {
-            _attackTokenSource.Cancel();
-            _attackTokenSource.Dispose();
-            _attackTokenSource = new CancellationTokenSource();
+            CancelAndResetAttackTokenSource();
 
-            PerformAction(dischargeReaction, swordHandTarget, 0.05f, false, _attackTokenSource.Token).Forget();
+            PerformAction(dischargeReaction, swordHandTarget, BodyPart.RightHand, dischargeReactionTime, false, _attackTokenSource.Token).Forget();
+        }
+
+        private bool RollForAttack()
+        {
+            var diff = Time.time - _lastAttackEnd;
+            if (maxTimeBetweenAttacks <= diff)
+                return true;
+            return Random.Range(0.0f, 1.0f) < frameAttackChance;
+        }
+
+        private async UniTask PanicShielding()
+        {
+            _thisPlayer.Shield.Activate();
+            _currentReactionSpeed *= panicSpeedMultiplier;
+            await UniTask.Delay((int)(panicTime * 1000));
+            _thisPlayer.Shield.Deactivate();
+            RefreshReactionSpeed(_opponent.Sword.IsActivated);
         }
 
         private async UniTask PerformRandomAttack(CancellationToken cancellationToken)
@@ -124,31 +212,33 @@ namespace LightFencing
             _isAttacking = true;
             var randomIndex = UnityEngine.Random.Range(0, attackMotions.Length);
             var motion = attackMotions[randomIndex];
-            await PerformAction(motion, swordHandTarget, 0.1f, true, cancellationToken);
+            await PerformAction(motion, swordHandTarget, BodyPart.RightHand, 0.1f, true, cancellationToken);
+            _thisPlayer.Sword.Deactivate();
             _isAttacking = false;
+            _lastAttackEnd = Time.time;
         }
 
-        private async UniTask PerformAction(TextAsset motion, Transform transformToMove, float lerpTimes, bool returnToStart, CancellationToken cancellationToken)
+        private async UniTask PerformAction(TextAsset motion, Transform transformToMove, BodyPart bodyPartToTrack, float lerpTimes, bool returnToStart, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested)
                 return;
             var frames = JsonConvert.DeserializeObject<List<MovementFrame>>(motion.text);
-            await PerformAction(frames, transformToMove, lerpTimes, returnToStart, cancellationToken);
+            await PerformAction(frames, transformToMove, bodyPartToTrack, lerpTimes, returnToStart, cancellationToken);
         }
 
-        private async UniTask PerformAction(List<MovementFrame> frames, Transform transformToMove, float lerpTimes, bool returnToStart, CancellationToken cancellationToken)
+        private async UniTask PerformAction(List<MovementFrame> frames, Transform transformToMove, BodyPart bodyPartToTrack, float lerpTimes, bool returnToStart, CancellationToken cancellationToken)
         {
             var startPosition = transformToMove.position;
             var startRotation = transformToMove.rotation;
 
-            var (initialPosition, initialRotation) = GetTransformFromFrame(frames[0]);
+            var (initialPosition, initialRotation) = GetTransformFromFrame(frames[0], bodyPartToTrack);
             await LerpUtils.LerpTo(transformToMove, initialPosition, initialRotation, lerpTimes);
             foreach (var currentFrame in frames)
             {
                 if (cancellationToken.IsCancellationRequested)
                     break;
 
-                var (position, rotation) = GetTransformFromFrame(currentFrame);
+                var (position, rotation) = GetTransformFromFrame(currentFrame, bodyPartToTrack);
                 transformToMove.SetPositionAndRotation(position, rotation);
 
                 ParseActions(currentFrame.Actions);
@@ -160,21 +250,45 @@ namespace LightFencing
                 await LerpUtils.LerpTo(transformToMove, startPosition, startRotation, lerpTimes);
         }
 
-        private (Vector3 position, Quaternion rotation) GetTransformFromFrame(MovementFrame frame)
+        private (Vector3 position, Quaternion rotation) GetTransformFromFrame(MovementFrame frame, BodyPart bodyPart)
         {
-            return (referenceTransform.TransformPoint(frame.RightHandPosition),
-                    referenceTransform.rotation * Quaternion.Euler(frame.RightHandRotation));
+            return bodyPart switch
+            {
+                BodyPart.None => (Vector3.zero, Quaternion.identity),
+                BodyPart.RightHand => (referenceTransform.TransformPoint(frame.RightHandPosition),
+                    referenceTransform.rotation * Quaternion.Euler(frame.RightHandRotation)),
+                BodyPart.LeftHand => (referenceTransform.TransformPoint(frame.LeftHandPosition),
+                    referenceTransform.rotation * Quaternion.Euler(frame.LeftHandRotation)),
+                BodyPart.Head => (referenceTransform.TransformPoint(frame.HeadPosition),
+                    referenceTransform.rotation * Quaternion.Euler(frame.HeadRotation)),
+                BodyPart.Body => (referenceTransform.TransformPoint(frame.BodyPosition),
+                    referenceTransform.rotation * Quaternion.Euler(frame.BodyRotation)),
+                _ => throw new System.NotImplementedException(),
+            };
         }
 
-        private void ParseActions(EquipmentAction action)
+        private void ParseActions(EquipmentAction action, bool parseSwordDeactivation = false)
         {
             if (action == EquipmentAction.None)
                 return;
 
             if (action.HasFlag(EquipmentAction.SwordActivated))
                 _thisPlayer.Sword.Activate();
-            if (action.HasFlag(EquipmentAction.SwordDeactivated))
+            if (parseSwordDeactivation && action.HasFlag(EquipmentAction.SwordDeactivated))
                 _thisPlayer.Sword.Deactivate();
         }
+
+        private void RefreshReactionSpeed(bool isIdle)
+        {
+            _currentReactionSpeed = isIdle ? idleReactionSpeed : Random.Range(minReactionSpeed, maxReactionSpeed);
+        }
+
+        private void CancelAndResetAttackTokenSource()
+        {
+            _attackTokenSource.Cancel();
+            _attackTokenSource.Dispose();
+            _attackTokenSource = new CancellationTokenSource();
+        }
+
     }
 }

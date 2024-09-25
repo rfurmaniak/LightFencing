@@ -3,9 +3,9 @@ using JetBrains.Annotations;
 using LightFencing.Core.Configs;
 using System;
 using System.Threading;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using Zenject;
-using LightFencing.Utils;
 
 namespace LightFencing
 {
@@ -108,7 +108,7 @@ namespace LightFencing
             {
                 await UniTask.Delay(_batteryDrainedTime, cancellationToken: cancellationToken);
             }
-            catch(Exception _)
+            catch (Exception _)
             {
                 Debug.Log("Battery drain regain cancelled");
                 return;
