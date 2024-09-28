@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace LightFencing.Equipment.Swords
 {
     public interface IBladeVisuals : IBaseEquipmentVisuals

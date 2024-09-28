@@ -15,6 +15,7 @@ namespace LightFencing.Equipment.Armors
         private BodyPartTracker helmetTracker;
 
         private IArmorVisuals _visuals;
+        private IArmorAudio _audio;
 
         public Transform HelmetTransform => helmetTracker.transform;
         public Transform BodyTransform => bodyPartTracker.transform;
@@ -23,9 +24,10 @@ namespace LightFencing.Equipment.Armors
 
         [UsedImplicitly]
         [Inject]
-        private void Construct(IArmorVisuals visuals)
+        private void Construct(IArmorVisuals visuals, IArmorAudio audio)
         {
             _visuals = visuals;
+            _audio = audio;
         }
 
         public override void Setup(Player player)
@@ -44,6 +46,7 @@ namespace LightFencing.Equipment.Armors
         {
             Debug.Log("Armor hit!");
             _visuals.BladeHit(hitPosition);
+            _audio.BladeHit(hitPosition);
             ArmorHit?.Invoke();
         }
     }

@@ -16,6 +16,8 @@ namespace LightFencing.Equipment.Shields
         private Collider armorCollider;
 
         private IShieldVisuals _visuals;
+        private IShieldAudio _audio;
+
         private bool _shieldActivated;
 
         public Transform ShieldTransform => transform;
@@ -23,15 +25,17 @@ namespace LightFencing.Equipment.Shields
 
         [UsedImplicitly]
         [Inject]
-        private void Construct(IShieldVisuals visuals)
+        private void Construct(IShieldVisuals visuals, IShieldAudio audio)
         {
             _visuals = visuals;
+            _audio = audio;
         }
 
         public void HandleBladeHit(Vector3 hitLocation)
         {
             Debug.Log("Shield hit!");
             _visuals.BladeHit(hitLocation);
+            _audio.BladeHit(hitLocation);
         }
 
         public override void Activate()
@@ -42,6 +46,7 @@ namespace LightFencing.Equipment.Shields
             armorCollider.enabled = true;
             Battery.StartUsingBattery();
             _visuals.LightUp();
+            _audio.LightUp();
             InvokeActivated();
         }
 
@@ -53,6 +58,7 @@ namespace LightFencing.Equipment.Shields
             armorCollider.enabled = false;
             Battery.StopUsingBattery();
             _visuals.LightDown();
+            _audio.LightDown();
             InvokeDeactivated();
         }
     }

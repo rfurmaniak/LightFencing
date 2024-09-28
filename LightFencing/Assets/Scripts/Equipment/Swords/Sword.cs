@@ -20,6 +20,7 @@ namespace LightFencing.Equipment.Swords
         private GameObject handle;
 
         private IBladeVisuals _visuals;
+        private IBladeAudio _audio;
 
         private MainConfig _mainConfig;
 
@@ -35,10 +36,11 @@ namespace LightFencing.Equipment.Swords
 
         [UsedImplicitly]
         [Inject]
-        private void Construct(MainConfig mainConfig, IBladeVisuals visuals)
+        private void Construct(MainConfig mainConfig, IBladeVisuals visuals, IBladeAudio audio)
         {
             _mainConfig = mainConfig;
             _visuals = visuals;
+            _audio = audio;
         }
 
         public override void Activate()
@@ -58,6 +60,7 @@ namespace LightFencing.Equipment.Swords
             _bladeActive = true;
             Battery.StartUsingBattery();
             _visuals.TurnBladeOn();
+            _audio.TurnBladeOn();
             InvokeActivated();
         }
 
@@ -67,6 +70,7 @@ namespace LightFencing.Equipment.Swords
                 return;
             DeactivationActions();
             _visuals.TurnBladeOff();
+            _audio.TurnBladeOff();
         }
 
         private void DeactivationActions()
@@ -82,6 +86,7 @@ namespace LightFencing.Equipment.Swords
             SwordDischarged?.Invoke();
             DeactivationActions();
             _visuals.DischargeBlade();
+            _audio.DischargeBlade();
 
             RestoreBlade(DischargeTime).Forget();
         }
